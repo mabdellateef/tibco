@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:axis2="http://xsd.tns.tibco.com/bw/models/binding/soap/axis2" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmlns:schema_1474374392979="http://www.example.org/schema/1474374392979" xmlns:wsdl_1474374392933="http://www.example.org/wsdl/1474374392933" xmi:id="_ZUqP4H8tEea43ImK4NPNaA" targetNamespace="http://tns.tibco.com/bw/composite/SOAPService" name="SOAPService" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_g75HAH8tEea43ImK4NPNaA" name="HelloWorld" promote="ComponentHelloService/HelloWorld">
+    <sca:interface.wsdl xmi:id="_g7_0sH8tEea43ImK4NPNaA" interface="http://www.example.org/wsdl/1474374392933#wsdl.interface(HelloWorld)" scaext:wsdlLocation="../Service%20Descriptors/HelloService.wsdl"/>
+    <scaext:binding xsi:type="axis2:SOAPServiceBinding" xmi:id="_p9BwUH8tEea43ImK4NPNaA" name="SOAPServiceBinding" targetNamespace="http://www.tibco.com/1599d81966a34428966943d2847fb861/SOAPServiceBinding" portTypeQName="wsdl_1474374392933:HelloWorld" transportBindingType="HTTP" attachmentStyle="SwA" modelVersion="1.2.0" portTypeWSDLLocation="platform:/resource/SOAPService/Service%20Descriptors/HelloService.wsdl">
+      <bindingType xmi:id="_p9KTMH8tEea43ImK4NPNaA"/>
+      <inboundConfiguration xsi:type="axis2:HttpTransportConfiguration" xmi:id="_scBiUH8tEea43ImK4NPNaA" endpointURI="/SOAPServiceBinding/helloWorld/" httpConnector="soapservice.HTTPConnectorResource"/>
+      <operationConfiguration xmi:id="_p9K6QH8tEea43ImK4NPNaA" operationName="sayHello" action="sayHello" actionNeeded="true">
+        <bindingType xmi:id="_p9K6QX8tEea43ImK4NPNaA"/>
+        <messageConfiguration xmi:id="_p9K6Qn8tEea43ImK4NPNaA" messageQName="wsdl_1474374392933:sayHelloRequest" wsdlLocation="platform:/resource/SOAPService/Service%20Descriptors/HelloService.wsdl">
+          <messagePartConfigurations xsi:type="axis2:BodyPartConfiguration" xmi:id="_p9K6Q38tEea43ImK4NPNaA" partName="parameters" partElementName="schema_1474374392979:sayHelloRequest"/>
+        </messageConfiguration>
+        <messageConfiguration xmi:id="_p9K6RH8tEea43ImK4NPNaA" messageQName="wsdl_1474374392933:sayHelloResponse" messageDirection="OUTPUT" wsdlLocation="platform:/resource/SOAPService/Service%20Descriptors/HelloService.wsdl">
+          <messagePartConfigurations xsi:type="axis2:BodyPartConfiguration" xmi:id="_p9K6RX8tEea43ImK4NPNaA" partName="parameters" partElementName="schema_1474374392979:sayHelloResponse"/>
+        </messageConfiguration>
+        <context xmi:id="_p9LhUH8tEea43ImK4NPNaA">
+          <inputMapping xmi:id="_p9LhUX8tEea43ImK4NPNaA"/>
+          <outputMapping xmi:id="_p9LhUn8tEea43ImK4NPNaA" direction="OUTPUT"/>
+        </context>
+      </operationConfiguration>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_p9LhU38tEea43ImK4NPNaA" bindingName="SOAPServiceBinding"/>
+  </sca:service>
+  <sca:property xmi:id="_ZpZw0H8tEea43ImK4NPNaA" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ZphsoH8tEea43ImK4NPNaA" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ZpkI4H8tEea43ImK4NPNaA" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ZpmlIH8tEea43ImK4NPNaA" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ZppBYH8tEea43ImK4NPNaA" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ZpsEsH8tEea43ImK4NPNaA" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ZpvvEH8tEea43ImK4NPNaA" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ZpyyYH8tEea43ImK4NPNaA" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_Zp2cwH8tEea43ImK4NPNaA" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:component xmi:id="_ZdxvoH8tEea43ImK4NPNaA" name="ComponentHelloService" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_ZdxvoX8tEea43ImK4NPNaA" processName="soapservice.HelloService"/>
+    <sca:service xmi:id="_g70OgH8tEea43ImK4NPNaA" name="HelloWorld">
+      <sca:interface.wsdl xmi:id="_g701kH8tEea43ImK4NPNaA" interface="http://www.example.org/wsdl/1474374392933#wsdl.interface(HelloWorld)" scaext:wsdlLocation="../Service%20Descriptors/HelloService.wsdl"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>
