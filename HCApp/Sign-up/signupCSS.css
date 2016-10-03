@@ -1,0 +1,37 @@
+html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+h1 {  
+ text-align:center;
+}  
+ form li {  
+list-style: none;  
+
+} 
+[id="emailerrid"] {  
+color: red; 
+}
+[id="passworderrid"] {  
+color: red; 
+} 
+[id="repassworderrid"] {  
+color: red; 
+} 
+[name="login"] {  
+margin-left: 70px;  
+font-weight: bold;  
+}  
+ 
+[type="submit"] {     
+font-size:18px  ;
+}  
