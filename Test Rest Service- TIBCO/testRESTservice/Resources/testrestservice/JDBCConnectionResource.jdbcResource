@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://xsd.tns.tibco.com/amf/models/sharedresource/jdbc" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:subject="http://xsd.tns.tibco.com/trinity/models/identity/subject" xmi:id="_fiHAQYlXEeavhPHNh2Utpw" name="testrestservice.JDBCConnectionResource" type="jdbc:JdbcDataSource">
+  <jndi:reference xmi:id="_fiPjIIlXEeavhPHNh2Utpw" key="subjectJndiName" type="subject:SubjectConfiguration" value=""/>
+  <jndi:configuration xsi:type="jdbc:JdbcDataSource" xmi:id="_fiPjIYlXEeavhPHNh2Utpw" username="cl51-users-nr3" password="#!3rphXTNRfmrvQQT5012YPFfZVf3ivY9sLQFsU+G+LI4=">
+    <connectionConfig xsi:type="jdbc:NonXaConnection" xmi:id="_fiQxQIlXEeavhPHNh2Utpw" jdbcDriver="com.mysql.jdbc.Driver" dbURL="jdbc:mysql://217.199.187.64:3306/cl51-users-nr3"/>
+    <connectionProperties xmi:id="_gYAGcIlXEeavhPHNh2Utpw" key="jarFile" value="mysql"/>
+  </jndi:configuration>
+</jndi:namedResource>
