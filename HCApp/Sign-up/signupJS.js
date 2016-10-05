@@ -6,7 +6,7 @@ function formValidation() {
     var repassword = document.registration.repassword;
     if (email_validation(email)) {
         if (password_validation(password, email, repassword)) {
-            alert(generateUniqueID(email.value));
+            alert("Done");
 			//generateUniqueID(email.value); //generate unique id for email verfication
         }
     }
@@ -77,26 +77,18 @@ function password_validation(password, email, repassword) {
 }
 //return false if email already exists
 //return true if email and password are correct
-function validateEmailAndPasswordExist(password, email) {
-
-    //Waiting for webservices to be implemented to complete the function
-    return true;
+function validateEmailAndPasswordExist(mypassword, myemail) {
+	
+xhr = new XMLHttpRequest();
+var url = "http://A-Ibrahim:8080/signuprest";
+xhr.open("POST", url, true);
+xhr.setRequestHeader("Content-type", "application/json");
+xhr.onreadystatechange = function () { 
+    if (xhr.readyState == 4 && xhr.status == 200) {
+			alert(JSON.stringify(xhr.responseText, null, 2));
+    }
 }
-
-//generate unique id for email verfication
-function generateUniqueID(email){
-	var date = new Date();
-    var components = [
-    date.getYear(),
-    date.getMonth(),
-    date.getDate(),
-	email,
-    date.getHours(),
-    date.getMinutes(),
-    date.getSeconds(),
-    date.getMilliseconds()
-     ];
-
-    var id = components.join("");
-	return id;
+var data = JSON.stringify({"email":myemail,"password":mypassword});
+xhr.send(data);
+    return true;
 }

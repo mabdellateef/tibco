@@ -1,39 +1,35 @@
-html, body {
+html,
+body {
     height: 100%;
 }
-
 html {
     display: table;
     margin: auto;
 }
-
 body {
     display: table-cell;
     vertical-align: middle;
 }
-h1 {  
- text-align:center;
-}  
- form li {  
-list-style: none;  
-
-} 
-[id="emailerrid"] {  
-color: red; 
+h1 {
+    text-align: center;
 }
-[id="passworderrid"] {  
-color: red; 
-} 
-[name="signup"] {  
-margin-left: 70px;  
-font-weight: bold;  
-}  
- 
-[type="submit"] {     
-font-size:18px  ;
-}  
-
-[name="forgot"] {  
-margin-left: 40px;  
-font-weight: bold;  
-} 
+form li {
+    list-style: none;
+}
+[id="emailerrid"] {
+    color: red;
+}
+[id="passworderrid"] {
+    color: red;
+}
+[name="signup"] {
+    margin-left: 70px;
+    font-weight: bold;
+}
+[type="submit"] {
+    font-size: 18px;
+}
+[name="forgot"] {
+    margin-left: 40px;
+    font-weight: bold;
+}

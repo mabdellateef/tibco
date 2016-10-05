@@ -16,19 +16,26 @@ h1 {
 form li {
     list-style: none;
 }
-[id="emailerrid"] {
+.sideli {
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+}
+.err {
     color: red;
 }
-[id="passworderrid"] {
-    color: red;
+.leftli {
+    float: right;
+    margin-right: 180px;
 }
-[id="repassworderrid"] {
-    color: red;
+.leftkidsli {
+    float: right;
+    margin-right: 200px;
 }
 [name="login"] {
     margin-left: 70px;
     font-weight: bold;
 }
-[type="submit"] {
+[id="btn"] {
     font-size: 18px;
 }

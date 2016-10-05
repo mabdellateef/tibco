@@ -1,0 +1,5 @@
+{"records": [{
+    "jsonSchemaLocation": "/SignUpRESTfulWS/Service Descriptors/signuprestfulws.Process-SignUpREST.json",
+    "conversionType": "linked",
+    "xsdSchemaTargetNamespace": "http://www.hcappcom/users/signup/1475677610251"
+}]}

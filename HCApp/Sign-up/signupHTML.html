@@ -1,26 +1,30 @@
-<!DOCTYPE html>  
-<html lang="en"><head>  
-<meta charset="utf-8">  
-<title>Sign up</title>  
-<meta name="keywords" content="" />  
-<meta name="description" content="signup page for hc" />  
-<link rel='stylesheet' href='signupCSS.css' type='text/css' />  
-<script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/md5.js"></script>
-<script src="signupJS.js"></script>  
-</head>  
-<body onload="document.registration.email.focus();">  
-<h1>Sign up</h1>  
-<form name='registration' onSubmit="return formValidation();">  
-<ul>   
-<li><input type="text" name="email" size="30" placeholder="Enter your email" /></li>
-<li id="emailerrid"></li>
-<li><input type="password" name="password" size="30" placeholder="Enter your password" /></li>
-<li id="passworderrid"></li>
-<li><input type="password" name="repassword" size="30" placeholder="Re-enter your password" /></li>
-<li id="repassworderrid"></li>
-<li><input type="submit" name="submit" value="Sign up" /></li>  
-</ul>  
-</form>
-<p name="login">Already a user? So, <a href="loginHTML.html">Log in!</a></p> 
-</body>  
-</html>  
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Sign up</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="signup page for hc" />
+    <link rel='stylesheet' href='signupCSS.css' type='text/css' />
+    <script src="signupJS.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
+
+<body onload="document.registration.email.focus();">
+    <h1>Sign up</h1>
+    <form method="post" name="registration" onSubmit="return formValidation();">
+        <ul>
+            <li><input type="text" name="email" size="30" placeholder="Enter your email" /></li>
+            <li id="emailerrid"></li>
+            <li><input type="password" name="password" size="30" placeholder="Enter your password" /></li>
+            <li id="passworderrid"></li>
+            <li><input type="password" name="repassword" size="30" placeholder="Re-enter your password" /></li>
+            <li id="repassworderrid"></li>
+            <li><input type="submit" name="submit" value="Sign up" /></li>
+        </ul>
+    </form>
+    <p name="login">Already a user? So, <a href="loginHTML.html">Log in!</a></p>
+</body>
+
+</html>

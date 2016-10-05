@@ -1,12 +1,12 @@
 function formValidation() {
     var email = document.registration.email;
     var password = document.registration.password;
-	var remember = document.registration.remember;
+    var remember = document.registration.remember;
     if (email_validation(email)) {
         if (password_validation(password, email)) {
-			if(remember.checked) {
-				//save login information
-			}
+            if (remember.checked) {
+                //save login information
+            }
             alert(email.value + " " + password.value);
         }
     }
@@ -38,34 +38,31 @@ function validateEmailForm(email) {
 function password_validation(password, email) {
     var password_len = password.value.length;
     var err = "";
-	document.getElementById('emailerrid').textContent="";
+    document.getElementById('emailerrid').textContent = "";
     if (password_len == 0) {
         document.getElementById('passworderrid').textContent = "Enter your password";
         password.focus();
     } else {
         var validateEmailAndPasswordExistRes = validateEmailAndPasswordExist(password.value, email.value);
         if (validateEmailAndPasswordExistRes == -1) {
-			var str = "Email not found, Sign Up here!";
+            var str = "Email not found, Sign Up here!";
             var result = str.link("signupHTML.html");
             document.getElementById('emailerrid').innerHTML = result;
             email.focus();
-        }
-        else if (validateEmailAndPasswordExistRes == 0) {
+        } else if (validateEmailAndPasswordExistRes == 0) {
             document.getElementById('passworderrid').textContent = "Wrong password";
             password.focus();
-        }
-		else if (validateEmailAndPasswordExistRes == 1) {
-			var str = "Email need confirmation, resend?";
+        } else if (validateEmailAndPasswordExistRes == 1) {
+            var str = "Email need confirmation, resend?";
             var result = str.link("confirmationEmailHTML.html");
-			document.getElementById('emailerrid').innerHTML = result;
+            document.getElementById('emailerrid').innerHTML = result;
             email.focus();
-        }
-        else if (validateEmailAndPasswordExistRes == 2) {
-			document.getElementById('passworderrid').textContent="";
+        } else if (validateEmailAndPasswordExistRes == 2) {
+            document.getElementById('passworderrid').textContent = "";
             return true;
         }
     }
-	
+
     return false;
 }
 //return -1 if email not found

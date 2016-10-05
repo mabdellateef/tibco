@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_l6Hj4IsHEeaMQulSgmp_Kw" targetNamespace="http://tns.tibco.com/bw/composite/SignUpRESTfulWS" name="SignUpRESTfulWS" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_9Z5oEosHEeaMQulSgmp_Kw" name="signuprest" promote="ComponentProcess/signuprest">
+    <sca:interface.wsdl xmi:id="_9Z5oFosHEeaMQulSgmp_Kw" interface="http://hcapp.com/20161005162540PLT#wsdl.interface(signuprest)" scaext:wsdlLocation="../Processes/signuprestfulws/Process.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_9Z5oF4sHEeaMQulSgmp_Kw" name="RestService" path="/signuprest" docBasePath="http://localhost:7777/SignUpRESTfulWS" docResourcePath="SignUpREST" basePath="/" connector="signuprestfulws.SignUpREST" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/signuprestfulws.Process-SignUpREST.json">
+      <operation xmi:id="_9Z5oGIsHEeaMQulSgmp_Kw" operationName="post" nickname="post-signuprest" httpMethod="POST" responseStyle="element" requestStyle="element">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_9aDZE4sHEeaMQulSgmp_Kw"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_9Z5oGYsHEeaMQulSgmp_Kw" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="_l_7Q8IsHEeaMQulSgmp_Kw" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_l_7Q8YsHEeaMQulSgmp_Kw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_mAFB8IsHEeaMQulSgmp_Kw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_mAFB8YsHEeaMQulSgmp_Kw" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_mAFB8osHEeaMQulSgmp_Kw" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_mAFB84sHEeaMQulSgmp_Kw" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_mAFB9IsHEeaMQulSgmp_Kw" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_mAFB9YsHEeaMQulSgmp_Kw" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_mAFB9osHEeaMQulSgmp_Kw" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:component xmi:id="_l881cIsHEeaMQulSgmp_Kw" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_l881cYsHEeaMQulSgmp_Kw" processName="signuprestfulws.Process"/>
+    <sca:service xmi:id="_9Z5oEIsHEeaMQulSgmp_Kw" name="signuprest">
+      <sca:interface.wsdl xmi:id="_9Z5oEYsHEeaMQulSgmp_Kw" interface="http://hcapp.com/20161005162540PLT#wsdl.interface(signuprest)" scaext:wsdlLocation="../Processes/signuprestfulws/Process.bwp"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>
