@@ -36,15 +36,5 @@ public class Signup
 		
 		return token;
 	}
-	
-	public static boolean response (int dbUpdate)
-	{
-		
-		if(dbUpdate==1)
-		{
-			return true;
-		}
-		
-		return false;
-	}
+
 }
