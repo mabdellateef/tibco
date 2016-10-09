@@ -1,0 +1,5 @@
+{"records": [{
+    "jsonSchemaLocation": "/LoginRESTfulWS/Service Descriptors/loginrestfulws.Process-Login.json",
+    "conversionType": "linked",
+    "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1476008220665"
+}]}

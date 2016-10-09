@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_WM1JMI4IEeaVyfbC1RPtbQ" targetNamespace="http://tns.tibco.com/bw/composite/LoginRESTfulWS" name="LoginRESTfulWS" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_qzxikY4JEeaVyfbC1RPtbQ" name="login" promote="ComponentProcess/login">
+    <sca:interface.wsdl xmi:id="_qzxilY4JEeaVyfbC1RPtbQ" interface="http://xmlns.example.com/20161009120838PLT#wsdl.interface(login)"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_qz6sgI4JEeaVyfbC1RPtbQ" name="RestService" path="/login" docBasePath="http://localhost:7777/LoginRESTfulWS" docResourcePath="Login" basePath="/" connector="loginrestfulws.Login" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/loginrestfulws.Process-Login.json">
+      <operation xmi:id="_qz6sgY4JEeaVyfbC1RPtbQ" operationName="post" nickname="post-login" httpMethod="POST" responseStyle="element" requestStyle="element">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_q0OOgI4JEeaVyfbC1RPtbQ"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_qz6sgo4JEeaVyfbC1RPtbQ" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="_WT1JEI4IEeaVyfbC1RPtbQ" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_WT1JEY4IEeaVyfbC1RPtbQ" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_WT1JEo4IEeaVyfbC1RPtbQ" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_WT1JE44IEeaVyfbC1RPtbQ" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_WT-6EI4IEeaVyfbC1RPtbQ" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_WT-6EY4IEeaVyfbC1RPtbQ" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_WT-6Eo4IEeaVyfbC1RPtbQ" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_WT-6E44IEeaVyfbC1RPtbQ" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_WUIEAI4IEeaVyfbC1RPtbQ" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_AcLigI4XEeaVyfbC1RPtbQ" name="defaultBool" type="XMLSchema:boolean" scaext:simpleValue="false" publicAccess="true" scalable="true"/>
+  <sca:component xmi:id="_WPqawI4IEeaVyfbC1RPtbQ" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_WPqawY4IEeaVyfbC1RPtbQ" processName="loginrestfulws.Process"/>
+    <sca:service xmi:id="_qznxkI4JEeaVyfbC1RPtbQ" name="login">
+      <sca:interface.wsdl xmi:id="_qzxikI4JEeaVyfbC1RPtbQ" interface="http://xmlns.example.com/20161009120838PLT#wsdl.interface(login)"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>

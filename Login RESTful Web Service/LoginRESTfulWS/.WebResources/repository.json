@@ -1,0 +1,7 @@
+{
+    "records": [],
+    "resources": [{
+        "location": "Service Descriptors/loginrestfulws.Process-Login.json",
+        "type": "generated"
+    }]
+}
