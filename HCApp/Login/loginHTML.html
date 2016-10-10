@@ -10,7 +10,8 @@
     <script src="loginJS.js"></script>
 </head>
 
-<body onload="document.registration.email.focus();">
+<body>
+<div style="display:block;" id="myDiv">
     <h1>Login</h1>
     <form name='registration' onSubmit="return formValidation();">
         <ul>
@@ -24,6 +25,8 @@
     </form>
     <p name="forgot"><a href="forgotPasswordHTML.html">Forgot my password</a></p>
     <p name="signup">A new user? So, <a href="signupHTML.html">Sign Up!</a></p>
+</div>
+<div style="display:none;" id="loader"></div>
 </body>
 
 </html>

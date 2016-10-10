@@ -1,4 +1,39 @@
-window.onload = getData;
+var user_id = 2;
+window.onload = getData();
+function getData() {
+    xhr = new XMLHttpRequest();
+    var url = "http://A-Ibrahim:8080/profiledata";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            hideLoader();
+			var res = JSON.parse(xhr.responseText);                               
+            document.getElementById('fname').value = res[0];
+            document.getElementById('lname').value = res[1];
+            document.getElementById('gender').value = res[2];
+			document.getElementById('city').value = res[3];
+            document.getElementById('country').value = res[4];
+            document.getElementById('ethn').value = res[5];
+			document.getElementById('profession').value = res[6];
+			document.getElementById('marital').value = res[7];
+			document.getElementById('kidsNo').value = res[8];
+            document.getElementById('day').value = res[9];
+            document.getElementById('month').value = res[10];
+            document.getElementById('year').value = res[11];
+        }
+		else{
+			 hideLoader();
+			document.getElementById("errorloading").style.display = "block";
+			document.getElementById("loader").style.display = "none";
+            document.getElementById("myDiv").style.display = "none";
+		}
+    }
+    var data = JSON.stringify({
+        "user_id": user_id
+    });
+    xhr.send(data);
+}
 
 function formValidation() {
     var fname = document.registration.fname;
@@ -34,10 +69,9 @@ function formValidation() {
                                         document.getElementById('kidserrid').textContent = "";
                                         if (name_validation(profession, "professionerrid")) {
                                             document.getElementById('professionerrid').textContent = "";
-                                            var res = [fname.value, lname.value, gender.value, ethn.value, city.value, country.value, day.value, month.value, year.value, marital.value, kidsNo.value, profession.value];
-                                            if (sendData(res)) {
-                                                return true;
-                                            }
+                                            var res = [fname.value, lname.value, gender.value, city.value ,country.value,ethn.value, profession.value, marital.value, kidsNo.value, day.value, month.value, year.value];
+                                            showLoader();
+											sendData(res);
                                         }
                                     }
                                 }
@@ -114,26 +148,48 @@ function choose_validation(name, errid) {
 
 function sendData(params) {
     //send data to web service
-    /*for (i=0; i<params.length; i++) {
-                     
-            }*/
-    return true;
+	xhr = new XMLHttpRequest();
+    var url = "http://A-Ibrahim:8080/profileupdate";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            hideLoader();
+			alert("Done");
+			window.location.replace('profileUpdateHTML.html');
+        }
+		else{
+			document.getElementById("errorloading").style.display = "block";
+			document.getElementById("loader").style.display = "none";
+            document.getElementById("myDiv").style.display = "none";
+		}
+    }
+    var data = JSON.stringify({
+        "user_id": user_id,
+		"first_name": params[0],
+		"last_name": params[1],
+		"gender": params[2],
+		"city": params[3],
+		"country": params[4],
+		"ethnicity": params[5],
+		"profession": params[6],
+		"marital_status": params[7],
+		"kids_number": params[8],
+		"birth_day": params[9],
+		"birth_month": params[10],
+		"birth_year": params[11]
+    });
+    xhr.send(data);
 }
 
-function getData() {
-    //get data from web service and set the field
-    /*document.getElementById('fname').value = ;
-	document.getElementById('lname').value = ;
-	document.getElementById('gender').value = ;
-	document.getElementById('ethn').value = ;
-	document.getElementById('city').value = ;
-	document.getElementById('country').value = ;
-	document.getElementById('day').value = ;
-	document.getElementById('month').value = ;
-	document.getElementById('year').value = ;
-	document.getElementById('marital').value = ;
-	document.getElementById('kidsNo').value = ;
-	document.getElementById('profession').value = ;
-	*/
-    return true;
+function showLoader() {
+    document.getElementById("loader").style.display = "block";
+    document.getElementById("myDiv").style.display = "none";
+
+}
+
+function hideLoader() {
+    document.getElementById("loader").style.display = "none";
+	document.getElementById("errorloading").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
 }

@@ -11,6 +11,7 @@
 </head>
 
 <body onload="document.registration.fname.focus();">
+<div style="display:none;" id="myDiv">
     <h1>Profile Update</h1>
     <form name='registration' method="post" onSubmit="return formValidation();">
         <ul>
@@ -502,6 +503,11 @@
             <li class="sideli"><input id='btn' type="button" onclick="window.location.replace('file:///C:/Users/aymanmostafa/Desktop/hc/profileUpdateHTML.html')" value="Cancel" /></li>
         </ul>
     </form>
+	</div>
+<div style="display:block;" id="loader"></div>
+<div style="display:none;" id="errorloading">
+<h1>Error loading data,try later</h1>
+</div>
 </body>
 
 </html>

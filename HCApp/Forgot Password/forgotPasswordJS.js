@@ -1,7 +1,7 @@
 function formValidation() {
     var email = document.registration.email;
     if (email_validation(email)) {
-            alert(email.value + " " + password.value);
+            validateEmailExist(email.value);
     }
     return false;
 
@@ -30,8 +30,6 @@ function validateEmailForm(email) {
 
 //return true if email exists
 //return false if email doesn't exist
-function validateEmailAndPasswordExist(email) {
-
-    //Waiting for webservices to be implemented to complete the function
-    return true;
+function validateEmailExist(email) {
+	
 }
