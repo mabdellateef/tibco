@@ -1,0 +1,12 @@
+{"records": [
+    {
+        "jsonSchemaLocation": "/ProfileDataRESTfulWS/Service Descriptors/profiledatarestfulws.Process-ProfileData.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.hcapp.com/users/profiles/1476113104282"
+    },
+    {
+        "jsonSchemaLocation": "/ProfileDataRESTfulWS/Service Descriptors/profiledatarestfulws.Process-ProfileData.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "/T1476113150805Converted/SimpleTypesArraysSchema"
+    }
+]}
