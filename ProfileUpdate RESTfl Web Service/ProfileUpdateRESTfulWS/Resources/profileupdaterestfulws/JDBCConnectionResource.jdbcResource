@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://xsd.tns.tibco.com/amf/models/sharedresource/jdbc" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:subject="http://xsd.tns.tibco.com/trinity/models/identity/subject" xmi:id="_BVXQkY8EEeauC9vNwxplHg" name="profileupdaterestfulws.JDBCConnectionResource" type="jdbc:JdbcDataSource">
+  <jndi:reference xmi:id="_BVXQko8EEeauC9vNwxplHg" key="subjectJndiName" type="subject:SubjectConfiguration" value=""/>
+  <jndi:configuration xsi:type="jdbc:JdbcDataSource" xmi:id="_BVXQk48EEeauC9vNwxplHg" username="cl21-hc_app_db" password="#!idxzLl4eYRG5GGi80wu5UdIBMgsqD4hsrJi4R7sk4nY=">
+    <connectionConfig xsi:type="jdbc:NonXaConnection" xmi:id="_BVXQlI8EEeauC9vNwxplHg" jdbcDriver="com.mysql.jdbc.Driver" dbURL="jdbc:mysql://79.170.40.230:3306/cl21-hc_app_db"/>
+    <connectionProperties xmi:id="_3cQS4I8CEeauC9vNwxplHg" key="jarFile" value="mysql"/>
+  </jndi:configuration>
+</jndi:namedResource>

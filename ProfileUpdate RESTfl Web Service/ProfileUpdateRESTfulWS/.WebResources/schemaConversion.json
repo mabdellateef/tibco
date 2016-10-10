@@ -1,0 +1,17 @@
+{"records": [
+    {
+        "jsonSchemaLocation": "/ProfileUpdateRESTfulWS/Service Descriptors/profileupdaterestfulws.Process-ProfileUpdate.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.hcpapp.com/users/profiles/1476106717866"
+    },
+    {
+        "jsonSchemaLocation": "/ProfileUpdateRESTfulWS/Service Descriptors/profileupdaterestfulws.Process-ProfileUpdate.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "/T1476107025133Converted/SimpleTypesArraysSchema"
+    },
+    {
+        "jsonSchemaLocation": "/ProfileUpdateRESTfulWS/Service Descriptors/profileupdaterestfulws.Process-ProfileUpdate.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.hcapp.com/users/profiles/1476115520386"
+    }
+]}

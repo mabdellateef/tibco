@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:tibex="http://www.tibco.com/bpel/2007/extensions" xmlns:tns="http://www.hcapp.com/users/profiles/1476115520386" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.hcapp.com/users/profiles/1476115520386">
+  <xsd:element name="ProfileUpdate">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="1" minOccurs="1" name="user_id" type="xsd:integer"/>
+                <xsd:element name="first_name" type="xsd:string"/>
+                <xsd:element name="last_name" type="xsd:string"/>
+                <xsd:element name="gender" type="xsd:string"/>
+                <xsd:element name="city" type="xsd:string"/>
+                <xsd:element name="country" type="xsd:string"/>
+                <xsd:element name="ethnicity" type="xsd:string"/>
+                <xsd:element name="profession" type="xsd:string"/>
+                <xsd:element name="marital_status" type="xsd:string"/>
+                <xsd:element name="kids_number" type="xsd:string"/>
+                <xsd:element name="birth_day" type="xsd:string"/>
+                <xsd:element name="birth_month" type="xsd:string"/>
+                <xsd:element name="birth_year" type="xsd:string"/>
+            </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+    <xsd:complexType name="stringArray">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="string" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+    <xsd:element name="stringArray" type="tns:stringArray"/>
+</xsd:schema>
