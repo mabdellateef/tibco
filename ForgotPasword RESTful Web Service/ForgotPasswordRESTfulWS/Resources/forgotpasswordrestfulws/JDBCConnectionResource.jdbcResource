@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://xsd.tns.tibco.com/amf/models/sharedresource/jdbc" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:subject="http://xsd.tns.tibco.com/trinity/models/identity/subject" xmi:id="_ORq7QY-OEeagqZK2NBw8mg" name="forgotpasswordrestfulws.JDBCConnectionResource" type="jdbc:JdbcDataSource">
+  <jndi:reference xmi:id="_OSIOQI-OEeagqZK2NBw8mg" key="subjectJndiName" type="subject:SubjectConfiguration" value=""/>
+  <jndi:configuration xsi:type="jdbc:JdbcDataSource" xmi:id="_OSIOQY-OEeagqZK2NBw8mg" username="cl21-hc_app_db" password="#!a//KLl/6nW3/7JIOFD5QpyFG9SGy3J9vKKvKf1Vf9Ao=">
+    <connectionConfig xsi:type="jdbc:NonXaConnection" xmi:id="_OSJcYI-OEeagqZK2NBw8mg" jdbcDriver="com.mysql.jdbc.Driver" dbURL="jdbc:mysql://79.170.40.230:3306/cl21-hc_app_db"/>
+    <connectionProperties xmi:id="_PUV5MI-OEeagqZK2NBw8mg" key="jarFile" value="mysql"/>
+  </jndi:configuration>
+</jndi:namedResource>

@@ -1,0 +1,5 @@
+{"records": [{
+    "jsonSchemaLocation": "/EmailVerificationRESTfulWS/Service Descriptors/emailverificationrestfulws.Process-EmailVerification.json",
+    "conversionType": "linked",
+    "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1476184779289"
+}]}

@@ -1,0 +1,7 @@
+{
+    "records": [],
+    "resources": [{
+        "location": "Service Descriptors/emailverificationrestfulws.Process-EmailVerification.json",
+        "type": "generated"
+    }]
+}

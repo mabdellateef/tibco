@@ -1,0 +1,52 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "EmailVerification REST service.",
+    "description" : "EmailVerification REST service."
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/emailverification" : {
+      "post" : {
+        "description" : "",
+        "operationId" : "post-emailverification",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/EmailVerification"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "post response",
+            "schema" : {
+              "type" : "boolean"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "EmailVerification" : {
+      "type" : "object",
+      "required" : [ "email", "token" ],
+      "properties" : {
+        "email" : {
+          "type" : "string"
+        },
+        "token" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}
