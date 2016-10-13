@@ -1,0 +1,7 @@
+{
+    "records": [],
+    "resources": [{
+        "location": "Service Descriptors/resetpasswordrestfulws.Process-ResetPassword.json",
+        "type": "generated"
+    }]
+}

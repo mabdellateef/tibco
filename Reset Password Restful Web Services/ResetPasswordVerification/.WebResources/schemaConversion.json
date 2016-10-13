@@ -1,0 +1,5 @@
+{"records": [{
+    "jsonSchemaLocation": "/ResetPasswordVerification/Service Descriptors/resetpasswordverification.Process-ResetPasswordVerification.json",
+    "conversionType": "linked",
+    "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1476361074895"
+}]}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_80mNMJFKEeavpq9lekwC9g" targetNamespace="http://tns.tibco.com/bw/composite/ResetPasswordRESTfulWS" name="ResetPasswordRESTfulWS" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_G1BJQJFLEeavpq9lekwC9g" name="resetpassword" promote="ComponentProcess/resetpassword">
+    <sca:interface.wsdl xmi:id="_G1BJRJFLEeavpq9lekwC9g" interface="http://xmlns.example.com/20161013154257PLT#wsdl.interface(resetpassword)" scaext:wsdlLocation="../Processes/resetpasswordrestfulws/Process.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_G1BJRZFLEeavpq9lekwC9g" name="RestService" path="/resetpassword" docBasePath="http://localhost:7777/ResetPasswordRESTfulWS" docResourcePath="ResetPassword" basePath="/" connector="resetpasswordrestfulws.ResetPassword" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/resetpasswordrestfulws.Process-ResetPassword.json">
+      <operation xmi:id="_G1BJRpFLEeavpq9lekwC9g" operationName="post" nickname="post-resetpassword" httpMethod="POST" responseStyle="element" requestStyle="element">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_G1BJT5FLEeavpq9lekwC9g"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_G1BJR5FLEeavpq9lekwC9g" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="_86s1MJFKEeavpq9lekwC9g" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_861_IJFKEeavpq9lekwC9g" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_861_IZFKEeavpq9lekwC9g" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_861_IpFKEeavpq9lekwC9g" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_861_I5FKEeavpq9lekwC9g" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_861_JJFKEeavpq9lekwC9g" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_861_JZFKEeavpq9lekwC9g" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_861_JpFKEeavpq9lekwC9g" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_861_J5FKEeavpq9lekwC9g" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:component xmi:id="_83a3sJFKEeavpq9lekwC9g" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_83a3sZFKEeavpq9lekwC9g" processName="resetpasswordrestfulws.Process"/>
+    <sca:service xmi:id="_G03YQJFLEeavpq9lekwC9g" name="resetpassword">
+      <sca:interface.wsdl xmi:id="_G03YQZFLEeavpq9lekwC9g" interface="http://xmlns.example.com/20161013154257PLT#wsdl.interface(resetpassword)" scaext:wsdlLocation="../Processes/resetpasswordrestfulws/Process.bwp"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>

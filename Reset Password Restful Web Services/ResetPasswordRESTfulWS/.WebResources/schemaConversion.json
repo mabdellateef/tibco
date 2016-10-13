@@ -1,0 +1,5 @@
+{"records": [{
+    "jsonSchemaLocation": "/ResetPasswordRESTfulWS/Service Descriptors/resetpasswordrestfulws.Process-ResetPassword.json",
+    "conversionType": "linked",
+    "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1476366211058"
+}]}
