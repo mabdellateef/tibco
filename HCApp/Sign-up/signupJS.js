@@ -17,6 +17,7 @@ function email_validation(email) {
         err = "Enter a valid email";
     }
     if (err) {
+		hideserverErr();
         document.getElementById('repassworderrid').textContent = "";
         document.getElementById('passworderrid').textContent = "";
         document.getElementById('emailerrid').textContent = err;
@@ -35,6 +36,7 @@ function password_validation(password, email, repassword) {
     var password_len = password.value.length;
     var err = "";
     var mn_value = 8;
+	hideserverErr();
     document.getElementById('emailerrid').textContent = "";
     if (password_len == 0) {
         document.getElementById('emailerrid').textContent = "";
@@ -65,10 +67,13 @@ function validateEmailAndPasswordExist(mypassword, myemail) {
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
             var rrr = xhr.responseText;
+			hideLoader();
+			hideserverErr();
             if (rrr == "true") {
-                //successful signup
-                window.location.replace('welcomeHTML.html');
-            } else {
+               document.getElementById("sucessloading").style.display = "block";
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("myDiv").style.display = "none";
+            } else if (rrr == "false") {
                 hideLoader();
                 document.getElementById('repassworderrid').textContent = "";
                 document.getElementById('passworderrid').textContent = "";
@@ -77,7 +82,13 @@ function validateEmailAndPasswordExist(mypassword, myemail) {
                 document.getElementById('emailerrid').innerHTML = result;
                 email.focus();
             }
+			else {
+				serverErr();
+			}
         }
+		else{
+			serverErr();
+		}
     }
     var data = JSON.stringify({
         "email": myemail,
@@ -95,4 +106,13 @@ function showLoader() {
 function hideLoader() {
     document.getElementById("loader").style.display = "none";
     document.getElementById("myDiv").style.display = "block";
+}
+
+function serverErr(){
+	hideLoader();
+	document.getElementById('servererrid').textContent = "Oooops! An unexpected error has occurred. try again!";
+}
+
+function hideserverErr(){
+	document.getElementById('servererrid').textContent = "";
 }

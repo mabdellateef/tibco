@@ -1,7 +1,11 @@
+if(readCookie()){
+	window.location.replace('welcomeLoginHTML.html');
+}
 function formValidation() {
     var email = document.registration.email;
     var password = document.registration.password;
     var remember = document.registration.remember;
+	hideserverErr();
     if (email_validation(email)) {
         password_validation(password, email, remember.checked)
     }
@@ -11,6 +15,7 @@ function formValidation() {
 function email_validation(email) {
     var email_len = email.value.length;
     var err = "";
+	hideserverErr();
     if (email_len == 0) {
         err = "Enter your email";
     } else if (!validateEmailForm(email.value)) {
@@ -33,6 +38,7 @@ function validateEmailForm(email) {
 function password_validation(password, email, rememberMe) {
     var password_len = password.value.length;
     var err = "";
+	hideserverErr();
     document.getElementById('emailerrid').textContent = "";
     if (password_len == 0) {
         document.getElementById('passworderrid').textContent = "Enter your password";
@@ -55,6 +61,7 @@ function validateEmailAndPasswordExist(password, email, rememberMe) {
         if (xhr.readyState == 4 && xhr.status == 200) {
             var rrr = xhr.responseText;
 			hideLoader();
+			hideserverErr();
             if (rrr == "-1") {
                 var str = "Email not found, Sign Up here!";
                 var result = str.link("signupHTML.html");
@@ -67,15 +74,21 @@ function validateEmailAndPasswordExist(password, email, rememberMe) {
                 password.focus();
             } else if (rrr == "-3") {
 				document.getElementById('passworderrid').textContent = "";
-                document.getElementById('emailerrid').textContent = "Email need confirmation, check your email";
+				var str = "Email need confirmation, check your email! or Resend it here!";
+				var result = str.link("resentEmailHTML.html");
+                document.getElementById('emailerrid').innerHTML = result;
                 email.focus();
             } else {
                 if(rememberMe) {
-					//cookies codes
+					setCookieForMonth(rrr);
 				}
+				setCookie(rrr);
 				window.location.replace('welcomeLoginHTML.html');
             }
         }
+		else{
+			serverErr();
+		}
     }
     var data = JSON.stringify({
         "email": email,
@@ -93,4 +106,36 @@ function showLoader() {
 function hideLoader() {
     document.getElementById("loader").style.display = "none";
     document.getElementById("myDiv").style.display = "block";
+}
+function serverErr(){
+	hideLoader();
+	document.getElementById('servererrid').textContent = "Oooops! An unexpected error has occurred. try again!";
+}
+
+function hideserverErr(){
+	document.getElementById('servererrid').textContent = "";
+}
+function setCookieForMonth(id) {
+    var d = new Date();
+    d.setTime(d.getTime() + (30*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = "user_id=" + id + ";" + expires + ";path=/";
+}
+
+function setCookie(id) {
+    document.cookie = "user_id=" + id + ";path=/";
+}
+
+function deleteCookie(){
+	var now = new Date();
+    now.setMonth( now.getMonth() - 1 );
+    var cookievalue = "user_id;"
+    document.cookie="name=" + cookievalue;
+    document.cookie = "expires=" + now.toUTCString() + ";"
+}
+
+function readCookie()
+{
+    var allcookies = document.cookie;
+    return allcookies.split('=')[1];
 }

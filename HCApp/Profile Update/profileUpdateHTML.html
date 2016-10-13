@@ -12,6 +12,7 @@
 
 <body onload="document.registration.fname.focus();">
 <div style="display:none;" id="myDiv">
+ <h1 id="servererrid"></h1>
     <h1>Profile Update</h1>
     <form name='registration' method="post" onSubmit="return formValidation();">
         <ul>
@@ -296,7 +297,7 @@
             </select>
             </li>
             <li class="sideli"><select id="day" name="day">  
-<option selected="" value="Default">Day</option>  
+<option selected="" value="0">Day</option>  
 <option value="1">1</option>
 <option value="2">2</option>
 <option value="3">3</option>
@@ -332,7 +333,7 @@
 </select></li>
 
             <li class="sideli"><select id="month" name="month">  
-<option selected="" value="Default">Month</option>  
+<option selected="" value="0">Month</option>  
   <option value="1">January</option>
     <option value="2">February</option>
     <option value="3">March</option>
@@ -348,7 +349,7 @@
 </select></li>
 
             <li class="sideli"><select id="year" name="year">  
-<option selected="" value="Default">Year</option>  
+<option selected="" value="0">Year</option>  
   <option value="1900">1900</option>
 <option value="1901">1901</option>
 <option value="1902">1902</option>

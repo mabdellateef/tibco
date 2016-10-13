@@ -6,15 +6,14 @@
     <title>Sign up</title>
     <meta name="keywords" content="" />
     <meta name="description" content="signup page for hc" />
-	
     <link rel='stylesheet' href='signupCSS.css' type='text/css' />
     <script src="signupJS.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
 
 <body>
 <div style="display:block;" id="myDiv">
-    <h1>Sign up</h1>
+    <h1 id="servererrid"></h1>
+	<h1>Sign up</h1>
     <form method="post" name="registration" onSubmit="return formValidation();">
         <ul>
             <li><input type="text" name="email" size="30" placeholder="Enter your email" /></li>
@@ -29,6 +28,10 @@
     <p name="login">Already a user? So, <a href="loginHTML.html">Log in!</a></p>
 </div>
 <div style="display:none;" id="loader"></div>
+<div style="display:none;" id="sucessloading">
+<h1>Your account has been made</h1> 
+<h2>please verify it by clicking the activation link that has been send to your email</h2>
+</div>
 </body>
 
 </html>

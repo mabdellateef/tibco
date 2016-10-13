@@ -25,6 +25,9 @@ form li {
 [id="repassworderrid"] {
     color: red;
 }
+[id="servererrid"] {
+    color: red;
+}
 [name="login"] {
     margin-left: 70px;
     font-weight: bold;

@@ -39,6 +39,9 @@ form li {
 [id="btn"] {
     font-size: 18px;
 }
+[id="servererrid"] {
+    color: red;
+}
 /*loader css code*/
 #loader {
   position: absolute;
