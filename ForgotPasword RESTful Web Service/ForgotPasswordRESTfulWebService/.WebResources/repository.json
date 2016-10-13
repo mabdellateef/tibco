@@ -1,0 +1,7 @@
+{
+    "records": [],
+    "resources": [{
+        "location": "Service Descriptors/forgotpasswordrestfulwebservice.Process-ForgotPassword.json",
+        "type": "generated"
+    }]
+}

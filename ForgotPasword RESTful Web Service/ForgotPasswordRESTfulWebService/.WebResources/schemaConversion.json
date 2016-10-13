@@ -1,0 +1,5 @@
+{"records": [{
+    "jsonSchemaLocation": "/ForgotPasswordRESTfulWebService/Service Descriptors/forgotpasswordrestfulwebservice.Process-ForgotPassword.json",
+    "conversionType": "linked",
+    "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1476281655602"
+}]}

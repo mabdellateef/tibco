@@ -1,5 +1,0 @@
-{"records": [{
-    "jsonSchemaLocation": "/ForgotPasswordRESTfulWS/Service Descriptors/forgotpasswordrestfulws.Process-ForgotPassword.json",
-    "conversionType": "linked",
-    "xsdSchemaTargetNamespace": "http://www.hcapp.com/users/PasswordReset/1476174987984"
-}]}
