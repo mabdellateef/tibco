@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_8P6bgJE5EeaiVc1azCQI4Q" targetNamespace="http://tns.tibco.com/bw/composite/ResendEmailVerificationRESTfulWS" name="ResendEmailVerificationRESTfulWS" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_MPIRQJE6EeaiVc1azCQI4Q" name="resendemailverification" promote="ComponentProcess/resendemailverification">
+    <sca:interface.wsdl xmi:id="_MPO-8JE6EeaiVc1azCQI4Q" interface="http://xmlns.example.com/20161013134112PLT#wsdl.interface(resendemailverification)" scaext:wsdlLocation="../Processes/resendemailverificationrestfulws/Process.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_MPRbMJE6EeaiVc1azCQI4Q" name="RestService" path="/resendemailverification" docBasePath="http://localhost:7777/ResendEmailVerificationRESTfulWS" docResourcePath="ResendEmailVerification" basePath="/" connector="resendemailverificationrestfulws.ResendEmailVerification" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/resendemailverificationrestfulws.Process-ResendEmailVerification.json">
+      <operation xmi:id="_MPSpUJE6EeaiVc1azCQI4Q" operationName="post" nickname="post-resendemailverification" httpMethod="POST" responseStyle="element" requestStyle="element">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_MPnZcJE6EeaiVc1azCQI4Q"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_MPSpUZE6EeaiVc1azCQI4Q" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="_8aRRYJE5EeaiVc1azCQI4Q" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8aXYAJE5EeaiVc1azCQI4Q" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8aabUJE5EeaiVc1azCQI4Q" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8ac3kJE5EeaiVc1azCQI4Q" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8aeswJE5EeaiVc1azCQI4Q" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8ahJAJE5EeaiVc1azCQI4Q" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8akMUJE5EeaiVc1azCQI4Q" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8amBgJE5EeaiVc1azCQI4Q" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_8an2sJE5EeaiVc1azCQI4Q" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:component xmi:id="_8VHroJE5EeaiVc1azCQI4Q" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_8VHroZE5EeaiVc1azCQI4Q" processName="resendemailverificationrestfulws.Process"/>
+    <sca:service xmi:id="_MPF1AJE6EeaiVc1azCQI4Q" name="resendemailverification">
+      <sca:interface.wsdl xmi:id="_MPGcEJE6EeaiVc1azCQI4Q" interface="http://xmlns.example.com/20161013134112PLT#wsdl.interface(resendemailverification)" scaext:wsdlLocation="../Processes/resendemailverificationrestfulws/Process.bwp"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>

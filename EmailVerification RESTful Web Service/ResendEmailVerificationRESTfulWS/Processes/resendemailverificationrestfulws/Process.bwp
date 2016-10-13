@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpws:process exitOnStandardFault="no"
-    name="emailverificationrestfulws.Process" suppressJoinFailure="yes"
-    targetNamespace="http://xmlns.example.com/20161011131811"
+    name="resendemailverificationrestfulws.Process"
+    suppressJoinFailure="yes"
+    targetNamespace="http://xmlns.example.com/20161013134112"
     xmlns:bpws="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
     xmlns:info="http://www.tibco.com/bw/process/info"
     xmlns:ns="http://www.tibco.com/pe/EngineTypes"
-    xmlns:ns0="http://xmlns.example.com/20161011131811PLT"
-    xmlns:ns1="http://www.tibco.com/namespaces/tnt/plugins/jdbc+42153fcc-fcfd-4a57-8a5b-d6a49d643a28+input"
-    xmlns:ns2="http://www.tibco.com/namespaces/tnt/plugins/jdbc"
+    xmlns:ns0="http://xmlns.example.com/20161013134112PLT"
+    xmlns:ns1="http://www.tibco.com/namespaces/tnt/plugins/jdbc+b30eb77b-8bfa-4722-b3f7-ea1cbba6e364+input"
+    xmlns:ns2="http://www.tibco.com/namespaces/tnt/plugins/jdbc+b30eb77b-8bfa-4722-b3f7-ea1cbba6e364+output"
+    xmlns:ns3="http://www.tibco.com/namespaces/tnt/plugins/jdbc+4ddc4af0-768c-4259-9105-b254c6154fb7+input"
+    xmlns:ns4="http://www.tibco.com/namespaces/tnt/plugins/jdbc+4ddc4af0-768c-4259-9105-b254c6154fb7+output"
+    xmlns:ns5="http://www.tibco.com/namespaces/tnt/plugins/jdbc+b4228680-d965-442d-ba3b-b2d338a57d71+input"
+    xmlns:ns6="http://www.tibco.com/namespaces/tnt/plugins/jdbc"
+    xmlns:ns7="www.tibco.com/plugin/java/JavaInvokeActivityInput+dd2123d5-224d-4e5b-bb39-f52a11413890+JavaInvokeActivityInput"
+    xmlns:ns8="www.tibco.com/plugin/java/JavaInvokeActivityOutput+dd2123d5-224d-4e5b-bb39-f52a11413890+JavaInvokeActivityOutput"
     xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
     xmlns:sca-bpel="http://docs.oasis-open.org/ns/opencsa/sca-bpel/200801"
     xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"
@@ -79,10 +86,8 @@
                         block="extension restriction substitution"
                         form="unqualified" minOccurs="0"
                         name="CustomJobId" type="xs:string"/>
-                    <!--xs:element name="RestartedFromCheckpoint" form="unqualified" block="extension 
-						restriction substitution" type="xs:boolean"/ -->
-                    <!--xs:element minOccurs="0" maxOccurs="unbounded" name="TrackingInfo" 
-						form="unqualified" block="extension restriction substitution" type="xs:string"/ -->
+                    <!--xs:element name="RestartedFromCheckpoint" form="unqualified" block="extension restriction substitution" type="xs:boolean"/-->
+                    <!--xs:element minOccurs="0" maxOccurs="unbounded" name="TrackingInfo" form="unqualified" block="extension restriction substitution" type="xs:string"/-->
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType block="extension restriction"
@@ -119,15 +124,15 @@
             <element name="ActivityTimedOutException" type="tns:ActivityTimedOutExceptionType"/>
         </schema>
         <schema
-            targetNamespace="http://www.tibco.com/namespaces/tnt/plugins/jdbc+42153fcc-fcfd-4a57-8a5b-d6a49d643a28+input"
-            xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.tibco.com/namespaces/tnt/plugins/jdbc+42153fcc-fcfd-4a57-8a5b-d6a49d643a28+input">
+            targetNamespace="http://www.tibco.com/namespaces/tnt/plugins/jdbc+b4228680-d965-442d-ba3b-b2d338a57d71+input"
+            xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.tibco.com/namespaces/tnt/plugins/jdbc+b4228680-d965-442d-ba3b-b2d338a57d71+input">
             <element name="jdbcUpdateActivityInput">
                 <complexType>
                     <sequence>
                         <element maxOccurs="1" minOccurs="1"
-                            name="email" nillable="true" type="string"/>
-                        <element maxOccurs="1" minOccurs="1"
                             name="token" nillable="true" type="string"/>
+                        <element maxOccurs="1" minOccurs="1"
+                            name="email" nillable="true" type="string"/>
                         <element maxOccurs="1" minOccurs="0"
                             name="ServerTimeZone" type="string"/>
                         <element maxOccurs="1" minOccurs="0"
@@ -209,24 +214,43 @@
             </xs:complexType>
             <xs:element name="jdbcUpdateActivityOutput" type="tns:jdbcUpdateOutput"/>
         </xs:schema>
+        <schema attributeFormDefault="unqualified"
+            elementFormDefault="qualified"
+            targetNamespace="www.tibco.com/plugin/java/JavaInvokeActivityInput+dd2123d5-224d-4e5b-bb39-f52a11413890+JavaInvokeActivityInput"
+            xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="www.tibco.com/plugin/java/JavaInvokeActivityInput+dd2123d5-224d-4e5b-bb39-f52a11413890+JavaInvokeActivityInput">
+            <element name="JavaInvokeActivityInput" type="tns:MutTypeMethodInputRoot"/>
+            <complexType name="MutTypeMethodInputRoot">
+                <sequence/>
+            </complexType>
+        </schema>
+        <schema attributeFormDefault="unqualified"
+            elementFormDefault="qualified"
+            targetNamespace="www.tibco.com/plugin/java/JavaInvokeActivityOutput+dd2123d5-224d-4e5b-bb39-f52a11413890+JavaInvokeActivityOutput"
+            xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="www.tibco.com/plugin/java/JavaInvokeActivityOutput+dd2123d5-224d-4e5b-bb39-f52a11413890+JavaInvokeActivityOutput">
+            <element name="JavaInvokeActivityOutput" type="tns:MutTypeMethodOutputRoot"/>
+            <complexType name="MutTypeMethodOutputRoot">
+                <sequence>
+                    <element form="unqualified" maxOccurs="1"
+                        minOccurs="0" name="MethodReturnValue" type="string"/>
+                </sequence>
+            </complexType>
+        </schema>
         <wsdl:definitions
-            targetNamespace="http://xmlns.example.com/20161011131811PLT"
-            xmlns:extns="http://www.example.com/namespaces/tns/1476184779289"
+            targetNamespace="http://xmlns.example.com/20161013134112PLT"
+            xmlns:extns="http://www.example.com/namespaces/tns/1476358926848"
             xmlns:extns1="http://tns.tibco.com/bw/REST"
-            xmlns:extns2="http://xmlns.example.com/EmailVerification/parameters"
             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
             xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"
-            xmlns:tns="http://xmlns.example.com/20161011131811PLT"
+            xmlns:tns="http://xmlns.example.com/20161013134112PLT"
             xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop"
             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
             <plnk:partnerLinkType name="partnerLinkType">
-                <plnk:role name="use" portType="tns:emailverification"/>
+                <plnk:role name="use" portType="tns:resendemailverification"/>
             </plnk:partnerLinkType>
-            <wsdl:import namespace="http://www.example.com/namespaces/tns/1476184779289"/>
+            <wsdl:import namespace="http://www.example.com/namespaces/tns/1476358926848"/>
             <wsdl:import namespace="http://tns.tibco.com/bw/REST"/>
-            <wsdl:import namespace="http://xmlns.example.com/EmailVerification/parameters"/>
             <wsdl:message name="postRequest">
-                <wsdl:part element="extns:EmailVerification" name="item"/>
+                <wsdl:part element="extns:ResendEmailVerification" name="item"/>
                 <wsdl:part element="extns1:httpHeaders"
                     name="httpHeaders" tibex:source="bw.rest"/>
             </wsdl:message>
@@ -239,13 +263,12 @@
             <wsdl:message name="post5XXFaultMessage">
                 <wsdl:part element="extns1:server5XXError" name="serverError"/>
             </wsdl:message>
-            <wsdl:portType name="emailverification"
-                tibex:bw.rest.apipath="/emailverification"
-                tibex:bw.rest.basepath="EmailVerification"
-                tibex:bw.rest.resource="Service Descriptors/emailverificationrestfulws.Process-EmailVerification.json"
+            <wsdl:portType name="resendemailverification"
+                tibex:bw.rest.apipath="/resendemailverification"
+                tibex:bw.rest.basepath="ResendEmailVerification"
+                tibex:bw.rest.resource="Service Descriptors/resendemailverificationrestfulws.Process-ResendEmailVerification.json"
                 tibex:bw.rest.resource.source="generated" tibex:source="bw.rest.service">
-                <wsdl:documentation>EmailVerification REST service.
-				</wsdl:documentation>
+                <wsdl:documentation>ResendEmailVerification REST service.</wsdl:documentation>
                 <wsdl:operation name="post">
                     <wsdl:input message="tns:postRequest" name="postInput"/>
                     <wsdl:output message="tns:postResponse" name="postOutput"/>
@@ -256,7 +279,7 @@
         </wsdl:definitions>
     </tibex:Types>
     <tibex:ProcessInfo callable="false" createdBy="ahmad"
-        createdOn="Tue Oct 11 13:18:11 EET 2016" description=""
+        createdOn="Thu Oct 13 13:41:12 EET 2016" description=""
         modifiers="public" productVersion="6.3.3 V23 2016-08-10"
         scalable="true" singleton="true" stateless="true" type="IT"/>
     <tibex:ProcessInterface context="" input="" output=""/>
@@ -439,8 +462,8 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@activity/@activities.2"/>
 
                                     <layoutConstraint
-                                    x="574"
-                                    xsi:type="notation:Bounds" y="19"/>
+                                    x="521"
+                                    xsi:type="notation:Bounds" y="56"/>
                                     </children>
 
                                     <children type="4002">
@@ -493,8 +516,62 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@activity/@activities.3"/>
 
                                     <layoutConstraint
-                                    x="136"
-                                    xsi:type="notation:Bounds" y="19"/>
+                                    x="247"
+                                    xsi:type="notation:Bounds" y="56"/>
+                                    </children>
+
+                                    <children type="4002">
+
+                                    <children type="4017">
+
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+
+                                    <children type="4017">
+
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+
+                                    <children type="4017">
+
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+
+                                    <children type="4017">
+
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+
+                                    <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@activity/@activities.4"/>
+
+                                    <layoutConstraint
+                                    x="44"
+                                    xsi:type="notation:Bounds" y="56"/>
                                     </children>
 
                                     <styles xsi:type="notation:DrawerStyle"/>
@@ -518,8 +595,8 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@activity"/>
 
                                     <layoutConstraint
-                                    height="186"
-                                    width="1102" xsi:type="notation:Bounds"/>
+                                    height="188"
+                                    width="1458" xsi:type="notation:Bounds"/>
                                     </children>
 
                                     <styles xsi:type="notation:SortingStyle"/>
@@ -538,10 +615,9 @@
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity"/>
 
                                     <layoutConstraint
-                                    height="-45"
-                                    width="-76"
-                                    x="30"
-                                    xsi:type="notation:Bounds" y="20"/>
+                                    height="100"
+                                    width="1461"
+                                    x="15" xsi:type="notation:Bounds"/>
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
                                     <styles xsi:type="notation:FilteringStyle"/>
@@ -553,7 +629,9 @@
                                     <styles xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity"/>
 
-                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    <layoutConstraint
+                                    height="124"
+                                    width="1501" xsi:type="notation:Bounds"/>
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
                                     <styles xsi:type="notation:FilteringStyle"/>
@@ -610,8 +688,9 @@
                                     <styles xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0/@messages.0"/>
                                     <layoutConstraint
-                                    height="140"
-                                    width="485" xsi:type="notation:Bounds"/>
+                                    height="143"
+                                    width="1563"
+                                    x="2" xsi:type="notation:Bounds"/>
                                     </children>
                                     <styles xsi:type="notation:SortingStyle"/>
                                     <styles xsi:type="notation:FilteringStyle"/>
@@ -622,7 +701,7 @@
                                     <styles xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity/@activities.0"/>
                                     <layoutConstraint
-                                    height="259" width="561" xsi:type="notation:Bounds"/>
+                                    height="261" width="561" xsi:type="notation:Bounds"/>
                                     </children>
                                     <styles xsi:type="notation:DrawerStyle"/>
                                     <styles xsi:type="notation:SortingStyle"/>
@@ -636,8 +715,8 @@
                                     gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
                                     <styles xsi:type="bwnotation:ResizingStyle"/>
                                     <element href="//0/@process/@activity/@activity"/>
-                                    <layoutConstraint height="384"
-                                    width="1236" xsi:type="notation:Bounds"/>
+                                    <layoutConstraint height="592"
+                                    width="1592" xsi:type="notation:Bounds"/>
                                 </children>
                                 <styles xsi:type="notation:SortingStyle"/>
                                 <styles xsi:type="notation:FilteringStyle"/>
@@ -665,10 +744,21 @@
             </children>
             <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
             <element href="//0/@process"/>
-            <layoutConstraint height="460" width="1581" xsi:type="notation:Bounds"/>
+            <layoutConstraint height="668" width="1937" xsi:type="notation:Bounds"/>
         </children>
         <styles xsi:type="notation:DiagramStyle"/>
         <element href="//0"/>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.0/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.0/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@activity/@links/@children.0"/>
+            <bendpoints points="[25, 0, -178, 0]$[179, 0, -24, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
         <edges
             source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.0/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1"
             target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2/@children.0/@children.1/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0" type="4006">
@@ -677,17 +767,16 @@
             </children>
             <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
             <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
-            <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@activity/@links/@children.0"/>
-            <bendpoints points="[25, 0, -413, 0]$[414, 0, -24, 0]" xsi:type="notation:RelativeBendpoints"/>
+            <element href="//0/@process/@activity/@activity/@activities.0/@messages.0/@activity/@activity/@links/@children.1"/>
+            <bendpoints points="[25, 0, -249, 0]$[250, 0, -24, 0]" xsi:type="notation:RelativeBendpoints"/>
         </edges>
     </notation:Diagram>
-    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.example.com/namespaces/tns/1476184779289"/>
+    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.example.com/namespaces/tns/1476358926848"/>
     <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://tns.tibco.com/bw/REST"/>
-    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://xmlns.example.com/EmailVerification/parameters"/>
     <bpws:partnerLinks>
-        <bpws:partnerLink myRole="use" name="emailverification"
+        <bpws:partnerLink myRole="use" name="resendemailverification"
             partnerLinkType="ns0:partnerLinkType"
-            sca-bpel:ignore="false" sca-bpel:service="emailverification"/>
+            sca-bpel:ignore="false" sca-bpel:service="resendemailverification"/>
     </bpws:partnerLinks>
     <bpws:variables>
         <bpws:variable element="ns:ProcessContext"
@@ -695,17 +784,21 @@
         <bpws:variable messageType="ns0:postRequest" name="post" sca-bpel:internal="true"/>
         <bpws:variable messageType="ns0:postResponse"
             name="postOut-input" sca-bpel:internal="true"/>
-        <bpws:variable element="ns1:jdbcUpdateActivityInput"
+        <bpws:variable element="ns5:jdbcUpdateActivityInput"
             name="JDBCUpdate-input" sca-bpel:internal="true"/>
-        <bpws:variable element="ns2:jdbcUpdateActivityOutput"
+        <bpws:variable element="ns6:jdbcUpdateActivityOutput"
             name="JDBCUpdate" sca-bpel:internal="true"/>
         <bpws:variable name="jdbcProperty" sca-bpel:hotUpdate="false"
             sca-bpel:privateProperty="true" sca-bpel:property="yes"
             sca-bpel:sharedResourceType="{http://xsd.tns.tibco.com/amf/models/sharedresource/jdbc}JdbcDataSource" type="xsd:string">
             <bpws:from>
-                <bpws:literal>emailverificationrestfulws.JDBCConnectionResource</bpws:literal>
+                <bpws:literal>resendemailverificationrestfulws.JDBCConnectionResource</bpws:literal>
             </bpws:from>
         </bpws:variable>
+        <bpws:variable element="ns7:JavaInvokeActivityInput"
+            name="GenerateToken-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns8:JavaInvokeActivityOutput"
+            name="GenerateToken" sca-bpel:internal="true"/>
     </bpws:variables>
     <bpws:extensions>
         <bpws:extension mustUnderstand="no" namespace="http://www.eclipse.org/gmf/runtime/1.0.2/notation"/>
@@ -718,57 +811,53 @@
     <bpws:scope name="scope">
         <bpws:flow name="flow">
             <bpws:links/>
-            <bpws:pick createInstance="yes" name="pick" tibex:xpdlId="9d2bb204-2b3e-46b2-b628-656eef22b507">
+            <bpws:pick createInstance="yes" name="pick" tibex:xpdlId="6a6f536c-5b49-4d9b-8afe-d51cea7fd29d">
                 <bpws:onMessage operation="post"
-                    partnerLink="emailverification"
-                    portType="ns0:emailverification"
-                    tibex:xpdlId="6bbddb6c-4aca-4f90-a3e5-96aa84ca0cd9" variable="post">
+                    partnerLink="resendemailverification"
+                    portType="ns0:resendemailverification"
+                    tibex:xpdlId="96d30da0-6726-4ce9-b0e5-4f1265a10d10" variable="post">
                     <bpws:scope name="scope1">
                         <bpws:flow name="flow1">
                             <bpws:links>
+                                <bpws:link
+                                    name="GenerateTokenToJDBCUpdate" tibex:linkType="SUCCESS"/>
                                 <bpws:link name="JDBCUpdateTopostOut" tibex:linkType="SUCCESS"/>
                             </bpws:links>
                             <bpws:empty name="OnMessageStart"
-                                tibex:constructor="onMessageStart" tibex:xpdlId="5c3823c7-99de-48f5-92d9-c40cc9aa4457"/>
+                                tibex:constructor="onMessageStart" tibex:xpdlId="5b1fc338-4d06-4b1a-b7a3-f64ce6f836bc"/>
                             <bpws:empty name="OnMessageEnd"
-                                tibex:constructor="onMessageEnd" tibex:xpdlId="0cc229c8-7c0b-4c86-b2c2-ef49891bc441"/>
+                                tibex:constructor="onMessageEnd" tibex:xpdlId="67546293-2b08-47a8-a2e9-13ec69bca134"/>
                             <bpws:reply name="postOut" operation="post"
-                                partnerLink="emailverification"
-                                portType="ns0:emailverification"
-                                tibex:xpdlId="7c9fbadd-d844-4ee3-b232-dff88fcdf0f6" variable="postOut-input">
+                                partnerLink="resendemailverification"
+                                portType="ns0:resendemailverification"
+                                tibex:xpdlId="bb3c8f15-3f3d-4139-bc5f-b6e251e91eb3" variable="postOut-input">
                                 <tibex:inputBinding expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-									&lt;xsl:stylesheet
-									xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-									xmlns:tns="http://xmlns.example.com/20161011131811PLT"
-									version="2.0"&gt;&lt;xsl:param
-									name="JDBCUpdate"/&gt;&lt;xsl:template name="postOut-input"
-									match="/"&gt;&lt;tns:postResponse&gt;&lt;itemResponse&gt;&lt;xsl:value-of
-									select="if($JDBCUpdate/noOfUpdates&gt;0)&amp;#xD;&amp;#xA;then
-									true()&amp;#xD;&amp;#xA;else
-									false()"/&gt;&lt;/itemResponse&gt;&lt;/tns:postResponse&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
+&lt;xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:tns="http://xmlns.example.com/20161013134112PLT" version="2.0"&gt;&lt;xsl:param name="JDBCUpdate"/&gt;&lt;xsl:template name="postOut-input" match="/"&gt;&lt;tns:postResponse&gt;&lt;itemResponse&gt;&lt;xsl:value-of select="if($JDBCUpdate/noOfUpdates&gt;0)&amp;#xD;&amp;#xA;then true()&amp;#xD;&amp;#xA;else false()"/&gt;&lt;/itemResponse&gt;&lt;/tns:postResponse&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;</tibex:inputBinding>
                                 <tibex:inputBindings>
                                     <tibex:partBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/20161011131811PLT&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;JDBCUpdate&quot;/>&#xa;    &lt;xsl:template name=&quot;postOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;itemResponse>&#xa;            &lt;xsl:value-of select=&quot;if($JDBCUpdate/noOfUpdates>0)&amp;#xD;&amp;#xA;then true()&amp;#xD;&amp;#xA;else false()&quot;/>&#xa;        &lt;/itemResponse>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://xmlns.example.com/20161013134112PLT&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;JDBCUpdate&quot;/>&#xa;    &lt;xsl:template name=&quot;postOut-input&quot; match=&quot;/&quot;>&#xa;        &lt;itemResponse>&#xa;            &lt;xsl:value-of select=&quot;if($JDBCUpdate/noOfUpdates>0)&amp;#xD;&amp;#xA;then true()&amp;#xD;&amp;#xA;else false()&quot;/>&#xa;        &lt;/itemResponse>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                                 </tibex:inputBindings>
                                 <bpws:targets>
                                     <bpws:target linkName="JDBCUpdateTopostOut"/>
                                 </bpws:targets>
-                                <bpws:correlations/>
                             </bpws:reply>
                             <bpws:extensionActivity>
                                 <tibex:activityExtension
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.tibco.com/namespaces/tnt/plugins/jdbc+42153fcc-fcfd-4a57-8a5b-d6a49d643a28+input&quot; xmlns:tns1=&quot;http://www.example.com/namespaces/tns/1476184779289&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;post&quot;/>&lt;xsl:template name=&quot;JDBCUpdate-input&quot; match=&quot;/&quot;>&lt;tns:jdbcUpdateActivityInput>&lt;email>&lt;xsl:value-of select=&quot;$post/item/tns1:EmailVerification/tns1:email&quot;/>&lt;/email>&lt;token>&lt;xsl:value-of select=&quot;$post/item/tns1:EmailVerification/tns1:token&quot;/>&lt;/token>&lt;/tns:jdbcUpdateActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>"
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.tibco.com/namespaces/tnt/plugins/jdbc+b4228680-d965-442d-ba3b-b2d338a57d71+input&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:tns1=&quot;http://www.example.com/namespaces/tns/1476358926848&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;post&quot;/>&lt;xsl:param name=&quot;GenerateToken&quot;/>&lt;xsl:template name=&quot;JDBCUpdate-input&quot; match=&quot;/&quot;>&lt;tns:jdbcUpdateActivityInput>&lt;token>&lt;xsl:choose>&lt;xsl:when test=&quot;exists($GenerateToken/MethodReturnValue)&quot;>&lt;xsl:value-of select=&quot;$GenerateToken/MethodReturnValue&quot;/>&lt;/xsl:when>&lt;xsl:otherwise>&lt;xsl:attribute name=&quot;xsi:nil&quot;>true&lt;/xsl:attribute>&lt;/xsl:otherwise>&lt;/xsl:choose>&lt;/token>&lt;email>&lt;xsl:value-of select=&quot;$post/item/tns1:ResendEmailVerification/tns1:email&quot;/>&lt;/email>&lt;/tns:jdbcUpdateActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>"
                                     expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"
                                     inputVariable="JDBCUpdate-input"
                                     name="JDBCUpdate"
                                     outputVariable="JDBCUpdate"
-                                    tibex:xpdlId="42153fcc-fcfd-4a57-8a5b-d6a49d643a28" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                                    tibex:xpdlId="b4228680-d965-442d-ba3b-b2d338a57d71" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                                    <bpws:targets>
+                                    <bpws:target linkName="GenerateTokenToJDBCUpdate"/>
+                                    </bpws:targets>
                                     <bpws:sources>
                                     <bpws:source linkName="JDBCUpdateTopostOut"/>
                                     </bpws:sources>
                                     <tibex:inputBindings>
                                     <tibex:inputBinding
-                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.tibco.com/namespaces/tnt/plugins/jdbc+42153fcc-fcfd-4a57-8a5b-d6a49d643a28+input&quot; xmlns:tns1=&quot;http://www.example.com/namespaces/tns/1476184779289&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;post.item&quot;/>&#xa;    &lt;xsl:template name=&quot;JDBCUpdate-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns:jdbcUpdateActivityInput>&#xa;            &lt;email>&#xa;                &lt;xsl:value-of select=&quot;$post.item/tns1:email&quot;/>&#xa;            &lt;/email>&#xa;            &lt;token>&#xa;                &lt;xsl:value-of select=&quot;$post.item/tns1:token&quot;/>&#xa;            &lt;/token>&#xa;        &lt;/tns:jdbcUpdateActivityInput>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.tibco.com/namespaces/tnt/plugins/jdbc+b4228680-d965-442d-ba3b-b2d338a57d71+input&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:tns1=&quot;http://www.example.com/namespaces/tns/1476358926848&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;post.item&quot;/>&#xa;    &lt;xsl:param name=&quot;GenerateToken&quot;/>&#xa;    &lt;xsl:template name=&quot;JDBCUpdate-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns:jdbcUpdateActivityInput>&#xa;            &lt;token>&#xa;                &lt;xsl:choose>&#xa;                    &lt;xsl:when test=&quot;exists($GenerateToken/MethodReturnValue)&quot;>&#xa;                        &lt;xsl:value-of select=&quot;$GenerateToken/MethodReturnValue&quot;/>&#xa;                    &lt;/xsl:when>&#xa;                    &lt;xsl:otherwise>&#xa;                        &lt;xsl:attribute name=&quot;xsi:nil&quot;>true&lt;/xsl:attribute>&#xa;                    &lt;/xsl:otherwise>&#xa;                &lt;/xsl:choose>&#xa;            &lt;/token>&#xa;            &lt;email>&#xa;                &lt;xsl:value-of select=&quot;$post.item/tns1:email&quot;/>&#xa;            &lt;/email>&#xa;        &lt;/tns:jdbcUpdateActivityInput>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
                                     </tibex:inputBindings>
                                     <tibex:config>
                                     <bwext:BWActivity
@@ -782,17 +871,55 @@
                                     <type href="http://ns.tibco.com/bw/palette/jdbc#//JDBCUpdateActivity"/>
                                     <value
                                     sharedResourceProperty="jdbcProperty"
-                                    sqlStatement="UPDATE users&#xa;  SET verification_chk = 1&#xa;  WHERE email = ? AND verification_id = ? AND verification_chk = 0"
+                                    sqlStatement="UPDATE users&#xa;  SET verification_id = ?&#xa;  WHERE email = ? AND verification_chk = 0"
                                     timeout="10" xsi:type="jdbcPalette:JDBCUpdateActivity">
 
                                     <PreparedParameters
                                     DataType="12"
-                                    DataTypeDisplayValue="VARCHAR" ParameterName="email"/>
+                                    DataTypeDisplayValue="VARCHAR" ParameterName="token"/>
 
                                     <PreparedParameters
                                     DataType="12"
-                                    DataTypeDisplayValue="VARCHAR" ParameterName="token"/>
+                                    DataTypeDisplayValue="VARCHAR" ParameterName="email"/>
                                     </value>
+                                    </properties>
+                                    </activityConfig>
+                                    </bwext:BWActivity>
+                                    </tibex:config>
+                                </tibex:activityExtension>
+                            </bpws:extensionActivity>
+                            <bpws:extensionActivity>
+                                <tibex:activityExtension
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?> &lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;www.tibco.com/plugin/java/JavaInvokeActivityInput+dd2123d5-224d-4e5b-bb39-f52a11413890+JavaInvokeActivityInput&quot; version=&quot;2.0&quot;> &lt;xsl:template name=&quot;JavaInvoke-input&quot; match=&quot;/&quot;> &lt;tns:JavaInvokeActivityInput/> &lt;/xsl:template> &lt;/xsl:stylesheet>"
+                                    expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"
+                                    inputVariable="GenerateToken-input"
+                                    name="GenerateToken"
+                                    outputVariable="GenerateToken"
+                                    tibex:xpdlId="dd2123d5-224d-4e5b-bb39-f52a11413890" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                                    <bpws:sources>
+                                    <bpws:source linkName="GenerateTokenToJDBCUpdate"/>
+                                    </bpws:sources>
+                                    <tibex:inputBindings>
+                                    <tibex:inputBinding
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?> &lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;www.tibco.com/plugin/java/JavaInvokeActivityInput+dd2123d5-224d-4e5b-bb39-f52a11413890+JavaInvokeActivityInput&quot; version=&quot;2.0&quot;> &lt;xsl:template name=&quot;JavaInvoke-input&quot; match=&quot;/&quot;> &lt;tns:JavaInvokeActivityInput/> &lt;/xsl:template> &lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                    </tibex:inputBindings>
+                                    <tibex:config>
+                                    <bwext:BWActivity
+                                    activityTypeID="bw.java.javamethod"
+                                    xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                                    xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                                    xmlns:java="http://ns.tibco.com/bw/palette/java" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                                    <activityConfig>
+                                    <properties
+                                    name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/java#//JavaMethod"/>
+                                    <value
+                                    className="com.tibco.java.Token"
+                                    isNew="true"
+                                    isNewActivity="true"
+                                    isStaticMethod="true"
+                                    methodName="generate_token"
+                                    methodReturn="string" xsi:type="java:JavaMethod"/>
                                     </properties>
                                     </activityConfig>
                                     </bwext:BWActivity>

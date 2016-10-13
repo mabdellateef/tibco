@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:smtp="http://xsd.tns.tibco.com/bw/models/sharedresource/smtp" xmlns:subject="http://xsd.tns.tibco.com/trinity/models/identity/subject" xmi:id="_AktHAZB1EeagzM5G8QlZJg" name="emailverificationrestfulws.SMTPResource" type="smtp:SmtpConfiguration">
+  <jndi:reference xmi:id="_AmAukJB1EeagzM5G8QlZJg" key="identityJNDIName" type="subject:SubjectConfiguration" value=""/>
+  <jndi:configuration xsi:type="smtp:SmtpConfiguration" xmi:id="_AmAukZB1EeagzM5G8QlZJg">
+    <tcpDetails xmi:id="_AmDx4JB1EeagzM5G8QlZJg" host="smtp.gmail.com" port="587" connectionTimeout="60000"/>
+    <userCredentials xmi:id="_AmDx4ZB1EeagzM5G8QlZJg" username="aibrahim@cloud9ers.com" password="#!nDB3xpSCh1ehKOrwLBFWYen6jL7A+fPnLbGBMHT8JpBPXgX4kpY9zA=="/>
+  </jndi:configuration>
+</jndi:namedResource>

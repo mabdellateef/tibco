@@ -2,17 +2,17 @@
   "swagger" : "2.0",
   "info" : {
     "version" : "1.0",
-    "title" : "EmailVerification REST service.\n\t\t\t\t",
-    "description" : "EmailVerification REST service.\n\t\t\t\t"
+    "title" : "ResendEmailVerification REST service.",
+    "description" : "ResendEmailVerification REST service."
   },
   "host" : "localhost:8080",
   "basePath" : "/",
   "schemes" : [ "http" ],
   "paths" : {
-    "/emailverification" : {
+    "/resendemailverification" : {
       "post" : {
         "description" : "",
-        "operationId" : "post-emailverification",
+        "operationId" : "post-resendemailverification",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
@@ -20,7 +20,7 @@
           "in" : "body",
           "description" : "",
           "schema" : {
-            "$ref" : "#/definitions/EmailVerification"
+            "$ref" : "#/definitions/ResendEmailVerification"
           },
           "required" : true
         } ],
@@ -36,14 +36,11 @@
     }
   },
   "definitions" : {
-    "EmailVerification" : {
+    "ResendEmailVerification" : {
       "type" : "object",
-      "required" : [ "email", "token" ],
+      "required" : [ "email" ],
       "properties" : {
         "email" : {
-          "type" : "string"
-        },
-        "token" : {
           "type" : "string"
         }
       }
