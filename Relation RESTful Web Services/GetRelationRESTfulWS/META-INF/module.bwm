@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_F1nZEJUtEeaYBbtv2v84lQ" targetNamespace="http://tns.tibco.com/bw/composite/GetRelationRESTfulWS" name="GetRelationRESTfulWS" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_mMBfspUtEeaYBbtv2v84lQ" name="getrelation" promote="ComponentProcess/getrelation">
+    <sca:interface.wsdl xmi:id="_mMBftpUtEeaYBbtv2v84lQ" interface="http://xmlns.example.com/20161018141918PLT#wsdl.interface(getrelation)" scaext:wsdlLocation="../Processes/getrelationrestfulws/Process.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_mMBft5UtEeaYBbtv2v84lQ" name="RestService" path="/getrelation" docBasePath="http://localhost:7777/GetRelationRESTfulWS" docResourcePath="GetRelation" basePath="/" connector="getrelationrestfulws.GetRelation" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/getrelationrestfulws.Process-GetRelation.json">
+      <operation xmi:id="_mMBfuJUtEeaYBbtv2v84lQ" operationName="post" nickname="post-getrelation" httpMethod="POST" responseStyle="array" requestStyle="element">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_mMWP0JUtEeaYBbtv2v84lQ"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_mMBfuZUtEeaYBbtv2v84lQ" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="_F80NQJUtEeaYBbtv2v84lQ" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_F80NQZUtEeaYBbtv2v84lQ" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_F80NQpUtEeaYBbtv2v84lQ" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_F80NQ5UtEeaYBbtv2v84lQ" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_F80NRJUtEeaYBbtv2v84lQ" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_F89-QJUtEeaYBbtv2v84lQ" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_F89-QZUtEeaYBbtv2v84lQ" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_F89-QpUtEeaYBbtv2v84lQ" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_F89-Q5UtEeaYBbtv2v84lQ" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:component xmi:id="_F4VV4JUtEeaYBbtv2v84lQ" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_F4VV4ZUtEeaYBbtv2v84lQ" processName="getrelationrestfulws.Process"/>
+    <sca:service xmi:id="_mMBfsJUtEeaYBbtv2v84lQ" name="getrelation">
+      <sca:interface.wsdl xmi:id="_mMBfsZUtEeaYBbtv2v84lQ" interface="http://xmlns.example.com/20161018141918PLT#wsdl.interface(getrelation)" scaext:wsdlLocation="../Processes/getrelationrestfulws/Process.bwp"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>

@@ -1,0 +1,85 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "ProfileUpdate REST service.",
+    "description" : "ProfileUpdate REST service."
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/profileupdate" : {
+      "post" : {
+        "description" : "",
+        "operationId" : "post-profileupdate",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/ProfileUpdate"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "post response",
+            "schema" : {
+              "type" : "boolean"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "ProfileUpdate" : {
+      "type" : "object",
+      "required" : [ "profession", "country", "gender", "ethnicity", "city", "birth_month", "last_name", "birth_year", "birth_day", "marital_status", "user_id", "kids_number", "first_name" ],
+      "properties" : {
+        "user_id" : {
+          "type" : "integer"
+        },
+        "first_name" : {
+          "type" : "string"
+        },
+        "last_name" : {
+          "type" : "string"
+        },
+        "gender" : {
+          "type" : "string"
+        },
+        "city" : {
+          "type" : "string"
+        },
+        "country" : {
+          "type" : "string"
+        },
+        "ethnicity" : {
+          "type" : "string"
+        },
+        "profession" : {
+          "type" : "string"
+        },
+        "marital_status" : {
+          "type" : "string"
+        },
+        "kids_number" : {
+          "type" : "string"
+        },
+        "birth_day" : {
+          "type" : "string"
+        },
+        "birth_month" : {
+          "type" : "string"
+        },
+        "birth_year" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "Summary about the new REST service.",
+    "description" : "Summary about the new REST service."
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/updatechilddata" : {
+      "post" : {
+        "description" : "",
+        "operationId" : "post-updatechilddata",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/UpdateChildData"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "post response",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "boolean",
+                "type" : "boolean",
+                "uniqueItems" : false
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "UpdateChildData" : {
+      "type" : "object",
+      "required" : [ "birth_day", "feeding_type", "child_id", "last_fed", "user_id", "name", "temperature", "gestation_period", "weight", "birth_order", "height" ],
+      "properties" : {
+        "child_id" : {
+          "type" : "integer"
+        },
+        "user_id" : {
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "feeding_type" : {
+          "type" : "string"
+        },
+        "temperature" : {
+          "type" : "string"
+        },
+        "last_fed" : {
+          "type" : "string"
+        },
+        "weight" : {
+          "type" : "string"
+        },
+        "height" : {
+          "type" : "string"
+        },
+        "gestation_period" : {
+          "type" : "string"
+        },
+        "birth_order" : {
+          "type" : "string"
+        },
+        "birth_day" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

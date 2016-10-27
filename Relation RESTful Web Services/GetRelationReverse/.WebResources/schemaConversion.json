@@ -1,0 +1,12 @@
+{"records": [
+    {
+        "jsonSchemaLocation": "/GetRelationReverse/Service Descriptors/getrelationreverse.Process-GetRelationReverse.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1477399387145"
+    },
+    {
+        "jsonSchemaLocation": "/GetRelationReverse/Service Descriptors/getrelationreverse.Process-GetRelationReverse.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1477399406215"
+    }
+]}

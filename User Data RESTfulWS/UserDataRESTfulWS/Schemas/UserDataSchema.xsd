@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"
+	xmlns:tns="http://www.example.com/namespaces/tns/1476615051847"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+	targetNamespace="http://www.example.com/namespaces/tns/1476615051847">
+	<xsd:element name="UserData">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element maxOccurs="1" minOccurs="1" name="user_id"
+					type="xsd:integer" />
+
+				<xsd:element maxOccurs="1" minOccurs="1" name="blood_pressure"
+					type="xsd:string" />
+				<xsd:element name="heart_rate" type="xsd:string" />
+				<xsd:element name="temperature" type="xsd:string" />
+				<xsd:element name="glucose" type="xsd:string" />
+				<xsd:element name="oxygen" type="xsd:string" />
+				<xsd:element name="INR" type="xsd:string" />
+				<xsd:element name="weight" type="xsd:string" />
+				<xsd:element name="height" type="xsd:string" />
+				<xsd:element name="BMI" type="xsd:string" />
+				<xsd:element name="period_start" type="xsd:string" />
+				<xsd:element name="period_end" type="xsd:string" />
+				<xsd:element name="feeding_type" type="xsd:string" />
+				<xsd:element name="last_fed" type="xsd:string" />
+				<xsd:element name="gestation_period" type="xsd:string" />
+				<xsd:element name="birth_order" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

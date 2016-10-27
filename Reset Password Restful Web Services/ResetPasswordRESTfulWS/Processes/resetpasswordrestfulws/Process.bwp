@@ -245,6 +245,8 @@
             targetNamespace="http://xmlns.example.com/20161013154257PLT"
             xmlns:extns="http://tns.tibco.com/bw/REST"
             xmlns:extns1="http://www.example.com/namespaces/tns/1476366211058"
+            xmlns:extns2="http://xmlns.example.com/ResetPassword/parameters"
+            xmlns:extns3="http://xmlns.example.com/ResetPassword/headerParameters"
             xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
             xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"
             xmlns:tns="http://xmlns.example.com/20161013154257PLT"
@@ -255,10 +257,14 @@
             </plnk:partnerLinkType>
             <wsdl:import namespace="http://tns.tibco.com/bw/REST"/>
             <wsdl:import namespace="http://www.example.com/namespaces/tns/1476366211058"/>
+            <wsdl:import namespace="http://xmlns.example.com/ResetPassword/parameters"/>
+            <wsdl:import namespace="http://xmlns.example.com/ResetPassword/headerParameters"/>
             <wsdl:message name="postRequest">
                 <wsdl:part element="extns1:ResetPassword" name="item"/>
-                <wsdl:part element="extns:httpHeaders"
+                <wsdl:part element="extns3:resetpasswordPostHeader"
                     name="httpHeaders" tibex:source="bw.rest"/>
+                <wsdl:part element="extns2:resetpasswordPostParameters"
+                    name="parameters" tibex:source="bw.rest"/>
             </wsdl:message>
             <wsdl:message name="postResponse">
                 <wsdl:part name="itemResponse" type="xsd:boolean"/>
@@ -777,6 +783,8 @@
     </notation:Diagram>
     <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://tns.tibco.com/bw/REST"/>
     <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.example.com/namespaces/tns/1476366211058"/>
+    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://xmlns.example.com/ResetPassword/parameters"/>
+    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://xmlns.example.com/ResetPassword/headerParameters"/>
     <bpws:partnerLinks>
         <bpws:partnerLink myRole="use" name="resetpassword"
             partnerLinkType="ns0:partnerLinkType"

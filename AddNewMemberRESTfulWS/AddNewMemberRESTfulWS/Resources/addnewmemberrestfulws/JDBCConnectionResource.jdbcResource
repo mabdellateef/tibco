@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://xsd.tns.tibco.com/amf/models/sharedresource/jdbc" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:subject="http://xsd.tns.tibco.com/trinity/models/identity/subject" xmi:id="_tq5UoZakEea4uYY6MgAj5Q" name="addnewmemberrestfulws.JDBCConnectionResource" type="jdbc:JdbcDataSource">
+  <jndi:reference xmi:id="_tq5UopakEea4uYY6MgAj5Q" key="subjectJndiName" type="subject:SubjectConfiguration" value=""/>
+  <jndi:configuration xsi:type="jdbc:JdbcDataSource" xmi:id="_tq5Uo5akEea4uYY6MgAj5Q" username="cl21-hc_app_db" password="#!EWWWpuBZfB5NP23q74nKaku04maZl70PVGGBONpUfzQ=">
+    <connectionConfig xsi:type="jdbc:NonXaConnection" xmi:id="_tq5UpJakEea4uYY6MgAj5Q" jdbcDriver="com.mysql.jdbc.Driver" dbURL="jdbc:mysql://79.170.40.230:3306/cl21-hc_app_db"/>
+    <connectionProperties xmi:id="_xYfnwJakEea4uYY6MgAj5Q" key="jarFile" value="mysql"/>
+  </jndi:configuration>
+</jndi:namedResource>

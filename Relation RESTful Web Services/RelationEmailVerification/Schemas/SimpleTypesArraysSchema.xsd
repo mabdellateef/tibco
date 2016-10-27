@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="/T1477400217094Converted/SimpleTypesArraysSchema" elementFormDefault="qualified" targetNamespace="/T1477400217094Converted/SimpleTypesArraysSchema">
+  <complexType name="booleanArray">
+    <sequence>
+      <element maxOccurs="unbounded" minOccurs="0" name="boolean" type="boolean"/>
+    </sequence>
+  </complexType>
+  <element name="booleanArray" type="tns:booleanArray"/>
+</schema>

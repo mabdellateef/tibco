@@ -1,0 +1,65 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "GetRelation REST service.",
+    "description" : "GetRelation REST service."
+  },
+  "host" : "localhost:8000",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/getrelation" : {
+      "post" : {
+        "description" : "",
+        "operationId" : "post-getrelation",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/GetRelation"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a Element to be returned",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Element",
+                "uniqueItems" : false
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "GetRelation" : {
+      "type" : "object",
+      "required" : [ "user_id" ],
+      "properties" : {
+        "user_id" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "Element" : {
+      "type" : "object",
+      "required" : [ "member_id", "member_fname" ],
+      "properties" : {
+        "member_id" : {
+          "type" : "integer"
+        },
+        "member_fname" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

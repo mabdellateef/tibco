@@ -1,0 +1,5 @@
+{"records": [{
+    "jsonSchemaLocation": "/UpdatechildDataRESTfulWS/Service Descriptors/updatechilddatarestfulws.Process-UpdateChildData.json",
+    "conversionType": "linked",
+    "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1476713307714"
+}]}

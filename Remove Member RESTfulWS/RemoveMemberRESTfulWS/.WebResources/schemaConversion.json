@@ -1,0 +1,5 @@
+{"records": [{
+    "jsonSchemaLocation": "/RemoveMemberRESTfulWS/Service Descriptors/removememberrestfulws.Process-RemoveMember.json",
+    "conversionType": "linked",
+    "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1476952442644"
+}]}

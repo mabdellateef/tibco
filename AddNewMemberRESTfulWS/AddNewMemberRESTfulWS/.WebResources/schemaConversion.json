@@ -1,0 +1,5 @@
+{"records": [{
+    "jsonSchemaLocation": "/AddNewMemberRESTfulWS/Service Descriptors/addnewmemberrestfulws.Process-AddMember.json",
+    "conversionType": "linked",
+    "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1476954659872"
+}]}

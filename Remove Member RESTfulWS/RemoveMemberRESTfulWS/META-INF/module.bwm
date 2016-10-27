@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_whoqgJafEea4uYY6MgAj5Q" targetNamespace="http://tns.tibco.com/bw/composite/RemoveMemberRESTfulWS" name="RemoveMemberRESTfulWS" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_CQc1oJagEea4uYY6MgAj5Q" name="removemember" promote="ComponentProcess/removemember">
+    <sca:interface.wsdl xmi:id="_CQc1pJagEea4uYY6MgAj5Q" interface="http://xmlns.example.com/20161020103238PLT#wsdl.interface(removemember)" scaext:wsdlLocation="../Processes/removememberrestfulws/Process.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_CQc1pZagEea4uYY6MgAj5Q" name="RestService" path="/removemember" docBasePath="http://localhost:7777/RemoveMemberRESTfulWS" docResourcePath="RemoveMember" basePath="/" connector="removememberrestfulws.RemoveMember" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/removememberrestfulws.Process-RemoveMember.json">
+      <operation xmi:id="_CQc1ppagEea4uYY6MgAj5Q" operationName="post" nickname="post-removemember" httpMethod="POST" responseStyle="element" requestStyle="element">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_CQ5hkJagEea4uYY6MgAj5Q"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_CQc1p5agEea4uYY6MgAj5Q" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="_wp1kQJafEea4uYY6MgAj5Q" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_wp1kQZafEea4uYY6MgAj5Q" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_wp1kQpafEea4uYY6MgAj5Q" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_wp-uMJafEea4uYY6MgAj5Q" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_wp-uMZafEea4uYY6MgAj5Q" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_wp-uMpafEea4uYY6MgAj5Q" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_wp-uM5afEea4uYY6MgAj5Q" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_wp-uNJafEea4uYY6MgAj5Q" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_wqIfMJafEea4uYY6MgAj5Q" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:component xmi:id="_wkw3AJafEea4uYY6MgAj5Q" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_wkw3AZafEea4uYY6MgAj5Q" processName="removememberrestfulws.Process"/>
+    <sca:service xmi:id="_CQTrsJagEea4uYY6MgAj5Q" name="removemember">
+      <sca:interface.wsdl xmi:id="_CQTrsZagEea4uYY6MgAj5Q" interface="http://xmlns.example.com/20161020103238PLT#wsdl.interface(removemember)" scaext:wsdlLocation="../Processes/removememberrestfulws/Process.bwp"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>

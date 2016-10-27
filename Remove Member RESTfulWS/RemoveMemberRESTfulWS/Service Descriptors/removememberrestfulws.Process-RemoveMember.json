@@ -1,0 +1,52 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "RemoveMember REST service.",
+    "description" : "RemoveMember REST service."
+  },
+  "host" : "localhost:8000",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/removemember" : {
+      "post" : {
+        "description" : "",
+        "operationId" : "post-removemember",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/RemoveMember"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "post response",
+            "schema" : {
+              "type" : "boolean"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "RemoveMember" : {
+      "type" : "object",
+      "required" : [ "member_id", "user_id" ],
+      "properties" : {
+        "user_id" : {
+          "type" : "integer"
+        },
+        "member_id" : {
+          "type" : "integer"
+        }
+      }
+    }
+  }
+}

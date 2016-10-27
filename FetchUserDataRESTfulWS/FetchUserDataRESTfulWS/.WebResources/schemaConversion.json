@@ -1,0 +1,12 @@
+{"records": [
+    {
+        "jsonSchemaLocation": "/FetchUserDataRESTfulWS/Service Descriptors/fetchuserdatarestfulws.Process-FetchUserData.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1476691582298"
+    },
+    {
+        "jsonSchemaLocation": "/FetchUserDataRESTfulWS/Service Descriptors/fetchuserdatarestfulws.Process-FetchUserData.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "/T1476691608155Converted/SimpleTypesArraysSchema"
+    }
+]}

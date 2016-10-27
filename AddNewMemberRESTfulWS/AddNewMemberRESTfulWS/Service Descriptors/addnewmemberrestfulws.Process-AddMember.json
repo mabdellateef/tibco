@@ -1,0 +1,52 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "AddMember REST service.",
+    "description" : "AddMember REST service."
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/addmember" : {
+      "post" : {
+        "description" : "",
+        "operationId" : "post-addmember",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/AddMember"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a integer to be returned",
+            "schema" : {
+              "type" : "integer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "AddMember" : {
+      "type" : "object",
+      "required" : [ "user_id", "email" ],
+      "properties" : {
+        "email" : {
+          "type" : "string"
+        },
+        "user_id" : {
+          "type" : "integer"
+        }
+      }
+    }
+  }
+}

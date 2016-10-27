@@ -1,0 +1,7 @@
+{
+    "records": [],
+    "resources": [{
+        "location": "Service Descriptors/fetchuserdatarestfulws.Process-FetchUserData.json",
+        "type": "generated"
+    }]
+}

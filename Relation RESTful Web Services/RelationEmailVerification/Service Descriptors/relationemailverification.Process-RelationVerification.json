@@ -1,0 +1,55 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "RelationVerification REST service.",
+    "description" : "RelationVerification REST service."
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/relationverification" : {
+      "post" : {
+        "description" : "",
+        "operationId" : "post-relationverification",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/RelationVerification"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "post response",
+            "schema" : {
+              "type" : "boolean"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "RelationVerification" : {
+      "type" : "object",
+      "required" : [ "user_email", "member_email", "token" ],
+      "properties" : {
+        "user_email" : {
+          "type" : "string"
+        },
+        "token" : {
+          "type" : "string"
+        },
+        "member_email" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

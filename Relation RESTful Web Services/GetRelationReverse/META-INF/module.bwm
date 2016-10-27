@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_iS3xsJqwEeaZPdx8PxFuxA" targetNamespace="http://tns.tibco.com/bw/composite/GetRelationReverse" name="GetRelationReverse" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_r-p6gpqwEeaZPdx8PxFuxA" name="getrelationreverse" promote="ComponentProcess/getrelationreverse">
+    <sca:interface.wsdl xmi:id="_r-zrgpqwEeaZPdx8PxFuxA" interface="http://xmlns.example.com/20161025144249PLT#wsdl.interface(getrelationreverse)" scaext:wsdlLocation="../Processes/getrelationreverse/Process.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_r-zrg5qwEeaZPdx8PxFuxA" name="RestService" path="/getrelationreverse" docBasePath="http://localhost:7777/GetRelationReverse" docResourcePath="GetRelationReverse" basePath="/" connector="getrelationreverse.GetRelationReverse" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/getrelationreverse.Process-GetRelationReverse.json">
+      <operation xmi:id="_r-9cgJqwEeaZPdx8PxFuxA" operationName="post" nickname="post-getrelationreverse" httpMethod="POST" responseStyle="array" requestStyle="element">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_r_QXcJqwEeaZPdx8PxFuxA"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_r-9cgZqwEeaZPdx8PxFuxA" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="_iaxJcJqwEeaZPdx8PxFuxA" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ia0z0JqwEeaZPdx8PxFuxA" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ia2pAJqwEeaZPdx8PxFuxA" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ia33IJqwEeaZPdx8PxFuxA" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ia4eMJqwEeaZPdx8PxFuxA" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ia6TYJqwEeaZPdx8PxFuxA" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ia7hgJqwEeaZPdx8PxFuxA" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ia8IkJqwEeaZPdx8PxFuxA" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ia8IkZqwEeaZPdx8PxFuxA" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:component xmi:id="_iV53kJqwEeaZPdx8PxFuxA" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_iV53kZqwEeaZPdx8PxFuxA" processName="getrelationreverse.Process"/>
+    <sca:service xmi:id="_r-p6gJqwEeaZPdx8PxFuxA" name="getrelationreverse">
+      <sca:interface.wsdl xmi:id="_r-p6gZqwEeaZPdx8PxFuxA" interface="http://xmlns.example.com/20161025144249PLT#wsdl.interface(getrelationreverse)" scaext:wsdlLocation="../Processes/getrelationreverse/Process.bwp"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>

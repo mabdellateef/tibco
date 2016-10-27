@@ -1,0 +1,53 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "FetchUserData REST service.",
+    "description" : "FetchUserData REST service."
+  },
+  "host" : "localhost:8000",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/fetchuserdata" : {
+      "post" : {
+        "description" : "",
+        "operationId" : "post-fetchuserdata",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/FetchUserData"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a string to be returned",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string",
+                "uniqueItems" : false
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "FetchUserData" : {
+      "type" : "object",
+      "required" : [ "user_id" ],
+      "properties" : {
+        "user_id" : {
+          "type" : "integer"
+        }
+      }
+    }
+  }
+}

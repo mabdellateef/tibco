@@ -1,0 +1,65 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "GetRelationReverse REST service.",
+    "description" : "GetRelationReverse REST service."
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/getrelationreverse" : {
+      "post" : {
+        "description" : "",
+        "operationId" : "post-getrelationreverse",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/GetRelationReverse"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a Element to be returned",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Element",
+                "uniqueItems" : false
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "GetRelationReverse" : {
+      "type" : "object",
+      "required" : [ "member_id" ],
+      "properties" : {
+        "member_id" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "Element" : {
+      "type" : "object",
+      "required" : [ "user_email", "user_id" ],
+      "properties" : {
+        "user_id" : {
+          "type" : "integer"
+        },
+        "user_email" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

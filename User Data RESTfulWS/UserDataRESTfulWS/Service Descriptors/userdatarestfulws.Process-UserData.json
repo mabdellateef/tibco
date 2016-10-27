@@ -1,0 +1,94 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "UserData REST service.",
+    "description" : "UserData REST service."
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/userdata" : {
+      "post" : {
+        "description" : "",
+        "operationId" : "post-userdata",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/UserData"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "post response",
+            "schema" : {
+              "type" : "boolean"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "UserData" : {
+      "type" : "object",
+      "required" : [ "feeding_type", "glucose", "heart_rate", "weight", "blood_pressure", "INR", "birth_order", "period_end", "last_fed", "user_id", "period_start", "temperature", "gestation_period", "oxygen", "height", "BMI" ],
+      "properties" : {
+        "user_id" : {
+          "type" : "integer"
+        },
+        "blood_pressure" : {
+          "type" : "string"
+        },
+        "heart_rate" : {
+          "type" : "string"
+        },
+        "temperature" : {
+          "type" : "string"
+        },
+        "glucose" : {
+          "type" : "string"
+        },
+        "oxygen" : {
+          "type" : "string"
+        },
+        "INR" : {
+          "type" : "string"
+        },
+        "weight" : {
+          "type" : "string"
+        },
+        "height" : {
+          "type" : "string"
+        },
+        "BMI" : {
+          "type" : "string"
+        },
+        "period_start" : {
+          "type" : "string"
+        },
+        "period_end" : {
+          "type" : "string"
+        },
+        "feeding_type" : {
+          "type" : "string"
+        },
+        "last_fed" : {
+          "type" : "string"
+        },
+        "gestation_period" : {
+          "type" : "string"
+        },
+        "birth_order" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

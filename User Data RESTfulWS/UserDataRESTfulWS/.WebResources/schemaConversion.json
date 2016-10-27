@@ -1,0 +1,5 @@
+{"records": [{
+    "jsonSchemaLocation": "/UserDataRESTfulWS/Service Descriptors/userdatarestfulws.Process-UserData.json",
+    "conversionType": "linked",
+    "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1476615051847"
+}]}

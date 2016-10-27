@@ -1,0 +1,5 @@
+{"records": [{
+    "jsonSchemaLocation": "/RelationEmailVerification/Service Descriptors/relationemailverification.Process-RelationVerification.json",
+    "conversionType": "linked",
+    "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1477400143205"
+}]}

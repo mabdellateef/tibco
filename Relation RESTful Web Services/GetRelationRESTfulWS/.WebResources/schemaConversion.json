@@ -1,0 +1,12 @@
+{"records": [
+    {
+        "jsonSchemaLocation": "/GetRelationRESTfulWS/Service Descriptors/getrelationrestfulws.Process-GetRelation.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1476793205186"
+    },
+    {
+        "jsonSchemaLocation": "/GetRelationRESTfulWS/Service Descriptors/getrelationrestfulws.Process-GetRelation.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1476793296275"
+    }
+]}

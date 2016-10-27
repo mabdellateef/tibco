@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW"
+	xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext"
+	xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0"
+	xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType"
+	xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions"
+	xmi:id="_TDQEEI8DEeauC9vNwxplHg" targetNamespace="http://tns.tibco.com/bw/composite/ProfileUpdateRESTfulWS"
+	name="ProfileUpdateRESTfulWS" compositeext:version="1.0.0"
+	compositeext:formatVersion="2">
+	<sca:service xmi:id="_8Dvl8o8DEeauC9vNwxplHg" name="profileupdate"
+		promote="ComponentProcess/profileupdate">
+		<sca:interface.wsdl xmi:id="_8Dvl9o8DEeauC9vNwxplHg"
+			interface="http://xmlns.example.com/20161010180500PLT#wsdl.interface(profileupdate)" />
+		<scaext:binding xsi:type="rest:RestServiceBinding"
+			xmi:id="_8Dvl948DEeauC9vNwxplHg" name="RestService" path="/profileupdate"
+			docBasePath="http://localhost:7777/ProfileUpdateRESTfulWS"
+			docResourcePath="ProfileUpdate" basePath="/"
+			connector="profileupdaterestfulws.ProfileUpdate" structuredData="true"
+			technologyVersion="2.0"
+			implementation="Service Descriptors/profileupdaterestfulws.Process-ProfileUpdate.json">
+			<operation xmi:id="_8Dvl-I8DEeauC9vNwxplHg" operationName="post"
+				nickname="post-profileupdate" httpMethod="POST" responseStyle="element"
+				requestStyle="element">
+				<clientFormat>json</clientFormat>
+				<clientRequestFormat>json</clientRequestFormat>
+			</operation>
+		</scaext:binding>
+		<scact:bindingAdjunct xmi:id="_8Dvl-Y8DEeauC9vNwxplHg"
+			bindingName="RestService" />
+	</sca:service>
+	<sca:property xmi:id="_TJyw8I8DEeauC9vNwxplHg" name="BW.DEPLOYMENTUNIT.TYPE"
+		type="XMLSchema:string" scalable="true" />
+	<sca:property xmi:id="_TJ8h8I8DEeauC9vNwxplHg" name="BW.APPNODE.NAME"
+		type="XMLSchema:string" scalable="true" />
+	<sca:property xmi:id="_TJ8h8Y8DEeauC9vNwxplHg" name="BW.DEPLOYMENTUNIT.NAME"
+		type="XMLSchema:string" scalable="true" />
+	<sca:property xmi:id="_TJ8h8o8DEeauC9vNwxplHg" name="BW.HOST.NAME"
+		type="XMLSchema:string" scalable="true" />
+	<sca:property xmi:id="_TJ8h848DEeauC9vNwxplHg" name="BW.DOMAIN.NAME"
+		type="XMLSchema:string" scalable="true" />
+	<sca:property xmi:id="_TJ8h9I8DEeauC9vNwxplHg" name="BW.DEPLOYMENTUNIT.VERSION"
+		type="XMLSchema:string" scalable="true" />
+	<sca:property xmi:id="_TJ8h9Y8DEeauC9vNwxplHg" name="BW.APPSPACE.NAME"
+		type="XMLSchema:string" scalable="true" />
+	<sca:property xmi:id="_TJ8h9o8DEeauC9vNwxplHg" name="BW.MODULE.VERSION"
+		type="XMLSchema:string" scalable="true" />
+	<sca:property xmi:id="_TJ8h948DEeauC9vNwxplHg" name="BW.MODULE.NAME"
+		type="XMLSchema:string" scalable="true" />
+	<sca:component xmi:id="_TFm0gI8DEeauC9vNwxplHg" name="ComponentProcess"
+		compositeext:version="1.0.0.qualifier">
+		<scaext:implementation xsi:type="BW:BWComponentImplementation"
+			xmi:id="_TFm0gY8DEeauC9vNwxplHg" processName="profileupdaterestfulws.Process" />
+		<sca:service xmi:id="_8Dvl8I8DEeauC9vNwxplHg" name="profileupdate">
+			<sca:interface.wsdl xmi:id="_8Dvl8Y8DEeauC9vNwxplHg"
+				interface="http://xmlns.example.com/20161010180500PLT#wsdl.interface(profileupdate)" />
+		</sca:service>
+	</sca:component>
+</sca:composite>
