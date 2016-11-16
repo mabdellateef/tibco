@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule
+	xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+	<http:listener-config name="HTTP_Listener_Configuration" host="localhost" port="8000" doc:name="HTTP Listener Configuration" />
+	<http:request-config name="HTTP_Request_Configuration" host="localhost" port="8000" doc:name="HTTP Request Configuration"/>
+	<db:mysql-config name="MySQL_Configuration" host="79.170.40.230" port="3306" user="cl21-hc_app_db" password="hc_app_db" database="cl21-hc_app_db" doc:name="MySQL Configuration"/>
+	<spring:beans>
+		<spring:bean id="Bean" name="Methods" class="Methods.Methods"/>
+	</spring:beans>
+	<smtp:gmail-connector name="Gmail" fromAddress="no-reply@hcapp.com" validateConnections="true" doc:name="Gmail" contentType="text/html"/>
+	<flow name="signupFlow">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/signup" allowedMethods="POST" doc:name="/signup"/>
+		<set-variable variableName="email" value="#[message.payload.email]" doc:name="Email"/>
+		<invoke object-ref="Methods" method="pw" methodArguments="#[message.payload.password]" doc:name="Encrypt Password"/>
+		<set-variable variableName="password_encrypted" value="#[payload]" doc:name="Ecrypted Password"/>
+		<invoke object-ref="Methods" method="token" doc:name="Generate Token"/>
+		<set-variable variableName="token" value="#[payload]" doc:name="token"/>
+		<db:insert config-ref="MySQL_Configuration" doc:name="Insert User Details">
+			<db:parameterized-query>
+				<![CDATA[INSERT INTO `users` (`email`,`password`,`token`,`token_date`,`registration_date`) VALUES (#[flowVars.email],#[flowVars.password_encrypted],#[flowVars.token],#[server.dateTime.format("yyyy.MM.dd' 'HH:mm:ss")],#[server.dateTime.format("yyyy.MM.dd' 'HH:mm:ss")]);]]>
+			</db:parameterized-query>
+		</db:insert>
+		<db:select config-ref="MySQL_Configuration" doc:name="SELECT user_id">
+			<db:parameterized-query>
+				<![CDATA[SELECT user_id FROM users WHERE email = #[flowVars.email];]]>
+			</db:parameterized-query>
+		</db:select>
+		<set-variable variableName="user_id" value="#[payload[0]['user_id']]" doc:name="user_id"/>
+		<db:insert config-ref="MySQL_Configuration" doc:name="user_data_id">
+			<db:parameterized-query>
+				<![CDATA[INSERT INTO users_data (user_id) VALUE (#[flowVars.user_id]);]]>
+			</db:parameterized-query>
+		</db:insert>
+		<db:insert config-ref="MySQL_Configuration" doc:name="user_info_id">
+			<db:parameterized-query>
+				<![CDATA[INSERT INTO users_info (user_id) VALUE (#[flowVars.user_id]);]]>
+			</db:parameterized-query>
+		</db:insert>
+		<invoke object-ref="Methods" method="token" doc:name="Generate Token"/>
+		<db:insert config-ref="MySQL_Configuration" doc:name="Auth_id_token">
+			<db:parameterized-query>
+				<![CDATA[INSERT INTO authentication (user_id, auth_token) VALUES (#[flowVars.user_id], #[payload]);]]>
+			</db:parameterized-query>
+		</db:insert>
+		<set-payload value="    &lt;h1&gt;Please verify your account by clicking the link below&lt;/h1&gt;     &lt;p&gt;&lt;a href=&quot; C:\Users\ahmad\Desktop\hc\emailVerfiyHTML.html?#[flowVars.email]&amp;#[flowVars.token] &quot;&gt;Verify..&lt;/a&gt;&lt;/p&gt; " encoding="ISO-8859-1" mimeType="text/html" doc:name="Content"/>
+		<smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="email" password="password" connector-ref="Gmail" to="#[flowVars.email]" subject="Account Verification" responseTimeout="10000" encoding="UTF-8" mimeType="text/html" doc:name="Send Email"/>
+		<set-payload value="true" doc:name="true"/>
+		<catch-exception-strategy doc:name="Catch Exception Strategy">
+			<set-payload value="false" doc:name="false"/>
+		</catch-exception-strategy>
+	</flow>
+	<flow name="email_verificationFlow">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/signup/email_verification" allowedMethods="POST" doc:name="/signup/email_verification"/>
+		<db:update config-ref="MySQL_Configuration" doc:name="Verify Token">
+			<db:parameterized-query>
+				<![CDATA[UPDATE users SET `status`= 1 WHERE token = #[message.payload.token] AND email = #[message.payload.email] AND `status` = 0;]]>
+			</db:parameterized-query>
+		</db:update>
+		<choice doc:name="Choice">
+			<when expression="#[payload.equals(1)]">
+				<set-payload value="true" doc:name="true"/>
+			</when>
+			<otherwise>
+				<set-payload value="false" doc:name="false"/>
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="fetch_data">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/profiles/userdata" allowedMethods="POST" doc:name="/profiles/userdata"/>
+		<db:select config-ref="MySQL_Configuration" doc:name="Fetch">
+			<db:parameterized-query>
+				<![CDATA[SELECT users_data. * , users_info.gender , users_info.birthday
+FROM users_data
+INNER JOIN users_info
+WHERE users_data.user_id = #[payload.user_id]
+AND users_info.user_id = #[payload.user_id]]]>
+			</db:parameterized-query>
+		</db:select>
+		<json:object-to-json-transformer doc:name="Object to JSON"/>
+	</flow>
+	<flow name="set_data">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/profiles/userdata/update" allowedMethods="POST" doc:name="/profiles/userdata/update"/>
+		<db:update config-ref="MySQL_Configuration" doc:name="Update">
+			<db:parameterized-query>
+				<![CDATA[UPDATE users_data
+SET heart_rate = #[payload.heart_rate] , blood_pressure = #[payload.blood_pressure] , temperature = #[payload.temperature], glucose = #[payload.glucose], oxygen = #[payload.oxygen], INR = #[payload.INR], weight = #[payload.weight] , height = #[payload.height] , BMI = #[payload.BMI] , period_start = #[payload.period_start] , period_end = #[payload.period_end], feeding_type = #[payload.feeding_type], last_fed = #[payload.last_fed], gestation_period = #[payload.gestation_period], birth_order = #[payload.birth_order]
+WHERE user_id = #[payload.user_id];]]>
+			</db:parameterized-query>
+		</db:update>
+		<echo-component doc:name="Echo"/>
+	</flow>
+	<flow name="forgot_passwordFlow">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/users/password/forgot" allowedMethods="POST" doc:name="/users/password/forgot"/>
+		<set-variable variableName="email" value="#[message.payload.email]" doc:name="Email"/>
+		<invoke object-ref="Methods" method="token" doc:name="Generate Token"/>
+		<set-variable variableName="token" value="#[payload]" doc:name="Token"/>
+		<db:update config-ref="MySQL_Configuration" doc:name="Insert Token">
+            <db:parameterized-query><![CDATA[UPDATE `users`
+  SET token = #[flowVars.token], token_date = #[server.dateTime.format("yyyy.MM.dd' 'HH:mm:ss")]
+  WHERE email = #[flowVars.email];]]></db:parameterized-query>
+		</db:update>
+        <choice doc:name="Choice">
+            <when expression="#[payload &gt; 0]">
+                <set-payload value="C:\Users\ahmad\Desktop\hc\resetPasswordHTML.html?#[flowVars.email]&amp;#[flowVars.token]" doc:name="URI"/>
+                <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="email" password="password" connector-ref="Gmail" to="#[flowVars.email]" subject="Reset Password" responseTimeout="10000" encoding="UTF-8" mimeType="text/html" doc:name="Send Email"/>
+                <set-payload value="true" doc:name="true"/>
+            </when>
+            <otherwise>
+                <set-payload value="false" doc:name="false"/>
+            </otherwise>
+        </choice>
+	</flow>
+	<flow name="password_url_verificationFlow">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/url/password/verification" allowedMethods="POST" doc:name="/url/password/verification"/>
+		<db:select config-ref="MySQL_Configuration" doc:name="Token Date">
+            <db:parameterized-query><![CDATA[SELECT token_date
+  FROM users
+  WHERE email = #[message.payload.email] AND token = #[message.payload.token];]]></db:parameterized-query>
+		</db:select>
+		<invoke object-ref="Methods" method="validateToken" methodArguments="#[payload[0].token_date.toString()]" doc:name="Validate Token"/>
+		<echo-component doc:name="Echo"/>
+	</flow>
+	<flow name="reset_passwordFlow">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/users/password/reset" doc:name="/users/password/reset" allowedMethods="POST"/>
+		<set-variable variableName="email" value="#[message.payload.email]" doc:name="email"/>
+		<invoke object-ref="Methods" method="pw" methodArguments="#[message.payload.password]" doc:name="Encrypt Password"/>
+		<db:update config-ref="MySQL_Configuration" doc:name="Update Password">
+            <db:parameterized-query><![CDATA[UPDATE users
+  SET password = #[payload] , token_date = "1111-11-11 11:11:11" , `status` = 1
+  WHERE email = #[flowVars.email];]]></db:parameterized-query>
+		</db:update>
+        <choice doc:name="Choice">
+            <when expression="#[payload &gt; 0]">
+                <set-payload value="true" doc:name="return True"/>
+            </when>
+            <otherwise>
+                <set-payload value="false" doc:name="return False"/>
+            </otherwise>
+        </choice>
+	</flow>
+	<flow name="relation_verificationFlow">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/url/relation/verification" allowedMethods="POST" doc:name="/url/relation/verification"/>
+		<db:update config-ref="MySQL_Configuration" doc:name="Update Status">
+			<db:parameterized-query>
+				<![CDATA[UPDATE relation
+  SET `status` = 1
+  WHERE user_id = #[message.payload.user_id] AND member_id = #[message.payload.member_id] AND status = 0 AND token = #[message.payload.token]]]>
+			</db:parameterized-query>
+		</db:update>
+        <choice doc:name="Choice">
+            <when expression="#[payload &gt; 0]">
+                <set-payload value="true" doc:name="return True"/>
+            </when>
+            <otherwise>
+                <set-payload value="false" doc:name="return False"/>
+            </otherwise>
+        </choice>
+	</flow>
+	<flow name="getRelation">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/members/relation" allowedMethods="POST" doc:name="/members/relation"/>
+		<db:select config-ref="MySQL_Configuration" doc:name="Database">
+            <db:parameterized-query><![CDATA[select relation.member_id , users_info.f_name
+from relation
+inner join users_info
+on relation.user_id = #[payload.'user_id']
+and relation.member_id = users_info.user_id
+and relation.status = 1;]]></db:parameterized-query>
+		</db:select>
+		<json:object-to-json-transformer doc:name="Object to JSON"/>
+	</flow>
+	<flow name="removemember">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/members/relation/remove" allowedMethods="POST" doc:name="/members/relation/remove"/>
+		<db:delete config-ref="MySQL_Configuration" doc:name="Database">
+			<db:parameterized-query>
+				<![CDATA[delete from relation
+where user_id = #[payload.'user_id']
+and member_id = #[payload.'member_id'];]]>
+			</db:parameterized-query>
+		</db:delete>
+	</flow>
+	<flow name="resendemailverification">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/email_verification/resend" allowedMethods="POST" doc:name="/email_verification/resend"/>
+		<set-variable variableName="email" value="#[payload.'email']" doc:name="email"/>
+        <invoke object-ref="Methods" method="token" doc:name="generateToken"/>
+		<set-variable variableName="token" value="#[payload]" doc:name="token"/>
+		<db:update config-ref="MySQL_Configuration" doc:name="Database">
+			<db:parameterized-query>
+				<![CDATA[update users
+set token = #[flowVars.token]
+where email = #[flowVars.email] and status = 0;]]>
+			</db:parameterized-query>
+		</db:update>
+		<choice doc:name="Choice">
+			<when expression="#[payload &gt; 0]">
+				<set-payload value="C:\Users\ahmad\Desktop\hc\emailVerfiyHTML.html?#[flowVars.email]&amp;#[flowVars.token]" doc:name="Content"/>
+				<smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="email" password="password" connector-ref="Gmail" to="#[flowVars.email]" subject="Account Verification" responseTimeout="10000" encoding="UTF-8" mimeType="text/html" doc:name="Send Email"/>
+				<set-payload value="true" doc:name="return true"/>
+			</when>
+			<otherwise>
+				<set-payload value="false" doc:name="return false"/>
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="addmember">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/members/relation/add" allowedMethods="POST" doc:name="/members/relation/add"/>
+		<set-variable variableName="email" value="#[payload.'email']" doc:name="email"/>
+		<set-variable variableName="user_id" value="#[payload.'user_id']" doc:name="user_id"/>
+		<db:insert config-ref="MySQL_Configuration" doc:name="insert into users (email, status)">
+			<db:parameterized-query>
+				<![CDATA[insert into users (email, status, password, token, registration_date)
+values (#[flowVars.email], 2, 'added member', 'added member', #[server.dateTime.format("yyyy.MM.dd' 'HH:mm:ss")]);]]>
+			</db:parameterized-query>
+		</db:insert>
+		<db:select config-ref="MySQL_Configuration" doc:name="select user_id">
+			<db:parameterized-query>
+				<![CDATA[select user_id
+from users
+where email = #[flowVars.email];]]>
+			</db:parameterized-query>
+		</db:select>
+		<set-variable variableName="dbuser_id" value="#[payload[0].user_id]" doc:name="dbuser_id"/>
+		<db:insert config-ref="MySQL_Configuration" doc:name="insert into users_info (user_id, f_name)">
+			<db:parameterized-query>
+				<![CDATA[insert into users_info (user_id, f_name)
+values (#[flowVars.dbuser_id] , #[flowVars.email.substring(0,flowVars.email.indexOf('@'))]);]]>
+			</db:parameterized-query>
+		</db:insert>
+		<db:insert config-ref="MySQL_Configuration" doc:name="insert into users_data (user_id)">
+			<db:parameterized-query>
+				<![CDATA[insert into users_data (user_id)
+values (#[flowVars.dbuser_id]);]]>
+			</db:parameterized-query>
+		</db:insert>
+		<db:insert config-ref="MySQL_Configuration" doc:name="insert into relation (user_id,member_id)">
+			<db:parameterized-query>
+				<![CDATA[insert into relation (user_id,member_id,token)
+values (#[flowVars.user_id],#[flowVars.dbuser_id],'added member');]]>
+			</db:parameterized-query>
+		</db:insert>
+		<set-payload value="1" doc:name="return 1"/>
+		<catch-exception-strategy doc:name="Catch Exception Strategy">
+			<db:select config-ref="MySQL_Configuration" doc:name="select user_id, status ">
+				<db:parameterized-query>
+					<![CDATA[select user_id, status
+from users
+where email = #[flowVars.email];]]>
+				</db:parameterized-query>
+			</db:select>
+			<set-variable variableName="catchuser_id" value="#[payload[0].user_id]" doc:name="catchuser_id"/>
+			<set-variable variableName="catchstatus" value="#[payload[0].status]" doc:name="catchstatus"/>
+			<choice doc:name="Choice">
+				<when expression="#[flowVars.catchuser_id == flowVars.user_id]">
+					<set-payload value="-3" doc:name="return -3"/>
+				</when>
+				<otherwise>
+					<db:select config-ref="MySQL_Configuration" doc:name="select user_id from relation">
+						<db:parameterized-query>
+							<![CDATA[select user_id from relation
+where user_id = #[flowVars.user_id] and member_id = #[flowVars.catchuser_id];]]>
+						</db:parameterized-query>
+					</db:select>
+					<choice doc:name="Choice">
+						<when expression="#[payload.isEmpty() &amp;&amp; flowVars.catchstatus == 2 ]">
+							<db:select config-ref="MySQL_Configuration" doc:name="SELECT email FROM users">
+								<db:parameterized-query>
+									<![CDATA[SELECT email , user_id FROM users
+WHERE user_id = (SELECT user_id FROM relation WHERE member_id = #[flowVars.catchuser_id] LIMIT 1)]]>
+								</db:parameterized-query>
+							</db:select>
+							<set-variable variableName="parentemail" value="#[payload[0].email]" doc:name="parentemail"/>
+							<invoke object-ref="Methods" method="token" doc:name="Generate Token"/>
+							<set-variable variableName="token" value="#[payload]" doc:name="token"/>
+							<db:insert config-ref="MySQL_Configuration" doc:name="insert into relation (user_id, member_id, status, token)">
+								<db:parameterized-query>
+									<![CDATA[insert into relation (user_id, member_id, status, token)
+values (#[flowVars.user_id],#[flowVars.catchuser_id],0,#[flowVars.token]);]]>
+								</db:parameterized-query>
+							</db:insert>
+							<set-payload value="C:\Users\ahmad\Desktop\hc\followVerfiyHTML.html?#[flowVars.user_id]&amp;#[flowVars.token]&amp;#[flowVars.catchuser_id]" doc:name="Content"/>
+							<smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="email" password="password" connector-ref="Gmail" to="#[flowVars.email]" subject="Account Verification" responseTimeout="10000" encoding="UTF-8" mimeType="text/html" doc:name="Send Email"/>							<set-payload value="0" doc:name="return 0"/>
+						</when>
+						<when expression="#[payload.isEmpty() == false ]">
+							<set-payload value="-2" doc:name="return -2"/>
+						</when>
+						<when expression="#[payload.isEmpty() &amp;&amp; flowVars.catchstatus != 2 ]">
+							<invoke object-ref="Methods" method="token" doc:name="Generate Token"/>
+							<set-variable variableName="token2" value="#[payload]" doc:name="token2"/>
+							<db:insert config-ref="MySQL_Configuration" doc:name="Database">
+								<db:parameterized-query>
+									<![CDATA[insert into relation (user_id, member_id, status, token)
+values (#[flowVars.user_id],#[flowVars.catchuser_id],0,#[flowVars.token2]);]]>
+								</db:parameterized-query>
+							</db:insert>
+							<set-payload value="C:\Users\ahmad\Desktop\hc\followVerfiyHTML.html?#[flowVars.user_id]&amp;#[flowVars.token2]&amp;#[flowVars.catchuser_id]" doc:name="Content"/>
+							<smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="email" password="password" connector-ref="Gmail" to="#[flowVars.email]" subject="Account Verification" responseTimeout="10000" encoding="UTF-8" mimeType="text/html" doc:name="Send Email"/>
+							<set-payload value="-1" doc:name="return -1"/>
+						</when>
+						<otherwise>
+							<set-payload value="-10" doc:name="return -10 (error)"/>
+						</otherwise>
+					</choice>
+				</otherwise>
+			</choice>
+		</catch-exception-strategy>
+	</flow>
+	<flow name="reverse_relationFlow">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/members/relation/reverse" allowedMethods="POST" doc:name="/members/relation/reverse"/>
+		<db:select config-ref="MySQL_Configuration" doc:name="getrelationreverse">
+			<db:parameterized-query>
+				<![CDATA[select relation.user_id ,users.email from relation
+inner join users
+on relation.member_id=#[payload.'member_id'] AND relation.user_id = users.user_id AND relation.status = 1;]]>
+			</db:parameterized-query>
+		</db:select>
+		<json:object-to-json-transformer doc:name="Object to JSON"/>
+	</flow>
+	<flow name="userprofileFlow">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/users/profile" allowedMethods="POST" doc:name="/users/profile"/>
+		<db:select config-ref="MySQL_Configuration" doc:name="select * from user_info">
+			<db:parameterized-query>
+				<![CDATA[select *
+from `users_info`
+where `user_id` = #[payload.'user_id']
+limit 1;]]>
+			</db:parameterized-query>
+		</db:select>
+		<json:object-to-json-transformer doc:name="Object to JSON"/>
+	</flow>
+	<flow name="update_userprofileFlow">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/users/profile/update" allowedMethods="POST" doc:name="/users/profile/update"/>
+		<db:update config-ref="MySQL_Configuration" doc:name="update user_info">
+			<db:parameterized-query>
+				<![CDATA[update `users_info`
+set `f_name` = #[payload.'f_name'],`l_name` = #[payload.'l_name'],`gender` = #[payload.'gender'],`city` = #[payload.'city'], `country` = #[payload.'country'], `ethnicity` = #[payload.'ethnicity'], `profession` = #[payload.'profession'], `marital_status` = #[payload.'marital_status'], `kids_number` = #[payload.'kids_number'], `birthday` = #[payload.'birthday']
+where `user_id` = #[payload.'user_id'];]]>
+			</db:parameterized-query>
+		</db:update>
+		<set-payload value="true" doc:name="true"/>
+	</flow>
+	<flow name="loginFlow">
+		<http:listener config-ref="HTTP_Listener_Configuration" path="/login"  doc:name="/login"/>
+		<set-variable variableName="postPassword" value="#[payload['password']]" doc:name="postPassword"/>
+		<db:select config-ref="MySQL_Configuration" doc:name="select authentication.auth_token, users.password, users.status">
+			<db:parameterized-query>
+				<![CDATA[select authentication.auth_token, users.password, users.status
+from `users`
+inner join `authentication`
+on users.user_id = authentication.user_id
+where users.email = #[payload.'email']
+limit 1;]]>
+			</db:parameterized-query>
+		</db:select>
+		<choice doc:name="Choice">
+			<when expression="#[payload.isEmpty()]">
+				<set-payload value="-1" doc:name="return -1 (no result)"/>
+			</when>
+			<otherwise>
+				<invoke object-ref="Methods" method="pwCheck" methodArguments="#[flowVars.postPassword],#[payload[0][&quot;password&quot;]],#[payload[0][&quot;status&quot;]],#[payload[0][&quot;auth_token&quot;]]" doc:name="Check"/>
+			</otherwise>
+		</choice>
+	</flow>
+</mule>
