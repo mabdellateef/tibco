@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Members</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="Child page for hc" />
+    <link rel='stylesheet' href='familyCSS.css' type='text/css' />
+    <script src="urls.js"></script>
+	<script src="familyJS.js"></script>
+</head>
+
+<body>
+    <div style="display:none;" id="myDiv">
+        <h1 id="servererrid"></h1>
+        <p name="followers"><a href="followersHTML.html">Who follows me?</a></p>
+        <h1>Family member</h1>
+        <div>
+            <input id='btn' type="button" onclick="return addBtn();" value="Add new Member" />
+        </div>
+    </div>
+    <div style="display:none;" id="myDiv2">
+    </div>
+    <div style="display:none;" id="myDiv3">
+    </div>
+    <div style="display:none;" id="formDiv">
+        <form method="post" name="registration" onSubmit="return formValidation();">
+            <ul>
+                <li><input type="text" name="email" size="30" placeholder="Enter member's email" /></li>
+                <li class="err" id="emailerrid"></li>
+                <li><input type="submit" name="submit" value="GO" /></li>
+            </ul>
+        </form>
+    </div>
+    <div style="display:block;" id="loader"></div>
+    <div style="display:none;" id="errorloading">
+        <h1>Error loading data,try again later</h1>
+    </div>
+</body>
+
+</html>

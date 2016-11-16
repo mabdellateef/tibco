@@ -1,0 +1,17 @@
+signup    		localhost:8000/signup
+email verification	localhost:8000/signup/email_verification
+userdata fetch		localhost:8000/profiles/userdata
+userdata set 		localhost:8000/prfiles/userdata/update
+forgotpassword		localhost:8000/users/password/forgot
+password url verify	localhost:8000/url/password/verification
+reset password		localhost:8000/users/password/reset
+relation verify		localhost:8000/url/relation/verification
+get relation		localhost:8000/members/relation
+remove member		localhost:8000/members/relation/remove
+resend email verify	localhost:8000/email_verification/resend
+add members 		localhost:8000/members/relation/add
+reverse relation	localhost:8000/members/relation/reverse
+user profile		localhost:8000/users/profile
+update user profile	localhost:8000/users/profile/update
+login			localhost:8000/login
+

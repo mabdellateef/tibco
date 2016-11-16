@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Daily check</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="daily check up page for hc" />
+    <link rel='stylesheet' href='dailyCheckCSS.css' type='text/css' />
+    <script src="urls.js"></script>
+	<script src="dailyCheckJS.js"></script>
+</head>
+
+<body>
+    <div style="display:none;" id="myDiv">
+        <h1 id="servererrid"></h1>
+        <h1>Daily Check Up</h1>
+        <form name='registration' method="post" onSubmit="return formValidation();">
+            <ul>
+                <li class="sideli">Heart Rate<input type="number" step="any" min="0" id="heartRateid" name="heartRate" style="width: 80px;" placeholder="Heart Rate" /></li>
+                <li class="sideli">Temperature<input type="number" step="any" min="0.1" id="tempid" name="temp" style="width: 85px;" placeholder="Temperature" /></li>
+                <div></div>
+                <li class="sideli err" id="heartRateerrid"></li>
+                <li class="sideli err" id="temperatureerrid"></li>
+                <div></div>
+                <li class="sideli">Blood Pre.<input type="number" step="any" min="0.1" id="bloodPreXid" name="bloodPreX" style="width: 80px;" placeholder="Blood Pre." /></li>
+                /
+                <li class="sideli"><input type="number" step="any" min="0.1" id="bloodPreYid" name="bloodPreY" style="width: 80px;" placeholder="Blood Pre." /></li>
+                <div></div>
+                <li class="sideli err" id="bloodPreerrid"></li>
+                <div></div>
+                <li class="sideli">Glucose %<input type="number" step="any" min="0.1" id="glucoseid" name="glucose" style="width: 80px;" placeholder="Glucose %" /></li>
+                <li class="sideli">INR<input type="number" step="any" min="0.1" id="inrid" name="inr" style="width: 85px;" placeholder="INR" /></li>
+                <div></div>
+                <li class="sideli err" id="glucoseerrid"></li>
+                <li class="sideli err" id="inrerrid"></li>
+                <div></div>
+                <li class="sideli">Weight(lb)<input type="number" step="any" min="0.1" id="weightid" name="weight" style="width: 80px;" placeholder="Weight(lb)" /></li>
+                <li class="sideli">Height(in)<input type="number" step="any" min="0.1" id="heightid" name="height" style="width: 85px;" placeholder="Height(in)" /></li>
+                BMI =
+                <li class="sideli" id="bmiid"></li>
+                <div></div>
+                <li class="sideli err" id="weighterrid"></li>
+                <li class="sideli err" id="heighterrid"></li>
+                <div></div>
+                <li class="sideli">SpO2<input type="number" step="any" min="0.1" id="spo2id" name="spo2" style="width: 80px;" placeholder="SpO2" /></li>
+                <div></div>
+                <li class="sideli err" id="spo2errid"></li>
+                <div></div>
+                <div id="periodDivid" style="display:none;">
+                    Period start
+                    <input type="date" id="periodStartid" name="periodStart" placeholder="start" /> end
+                    <input type="date" id="periodEndid" name="periodEnd" placeholder="end" />
+                    <div></div>
+                    <li class="sideli err" id="perioderrid"></li>
+                    <li></li>
+                </div>
+                <div id="childDivid" style="display:none;">
+                    Feeding type
+                    <input type="text" id="feedingid" name="feeding" style="width: 85px;" placeholder="Feeding type" /></li>
+                    Last Fed
+                    <input type="time" id="last_fedid" name="last_fed" style="width: 200px;" placeholder="HH:MM AM/PM" /></li>
+                    <li class="sideli "><input id='nowid' type="button" name="now" value="now" onclick="getTimeNow();" /></li>
+                    <div></div>
+                    <li class="sideli leftli"><select id="last_fed_dayid" name="last_fed_day">  
+<option selected="" value="Default">select Fed day</option>  
+<option value="today">Today</option>  
+<option value="yesterday">Yesterday</option>  
+</select></li>
+                    <div></div>
+                    <li class="sideli err" id="feedingerrid"></li>
+                    <li class="sideli err" id="last_federrid"></li>
+                    <div></div>
+                    <li></li>
+                    <div></div>
+                    <li class="sideli">Gestation period<input type="number" step="1" min="0" id="gestationid" name="gestation" style="width: 80px;" placeholder="(weeks)" /></li>
+                    <li class="sideli">Birth order<input type="number" step="1" min="0" id="birth_orderid" name="birth_order" style="width: 85px;" placeholder="Birth order" /></li>
+                    <div></div>
+                    <li class="sideli err" id="gestationerrid"></li>
+                    <li class="sideli err" id="birth_ordererrid"></li>
+                </div>
+
+                <div></div>
+                <li class="sideli"><input id='btn' type="submit" name="submit" value="Update" /></li>
+                <li class="sideli"><input id='btn' type="button" onclick="window.location.replace('file:///C:/Users/aymanmostafa/Desktop/hc/dailyCheckHTML.html')" value="Cancel" /></li>
+
+            </ul>
+        </form>
+
+    </div>
+    <div style="display:block;" id="loader"></div>
+    <div style="display:none;" id="errorloading">
+        <h1>Error loading data,try later</h1>
+    </div>
+</body>
+
+</html>
