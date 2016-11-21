@@ -27,11 +27,11 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 	<smtp:gmail-connector name="Gmail" fromAddress="no-reply@hcapp.com" validateConnections="true" doc:name="Gmail" contentType="text/html"/>
 	<flow name="signupFlow">
 		<http:listener config-ref="HTTP_Listener_Configuration" path="/signup" allowedMethods="POST" doc:name="/signup"/>
-		<set-variable variableName="email" value="#[message.payload.email]" doc:name="Email"/>
+		<set-variable variableName="email" value="#[message.payload.email]" doc:name="http.Email"/>
 		<invoke object-ref="Methods" method="pw" methodArguments="#[message.payload.password]" doc:name="Encrypt Password"/>
 		<set-variable variableName="password_encrypted" value="#[payload]" doc:name="Ecrypted Password"/>
 		<invoke object-ref="Methods" method="token" doc:name="Generate Token"/>
-		<set-variable variableName="token" value="#[payload]" doc:name="token"/>
+		<set-variable variableName="token" value="#[payload]" doc:name="Token"/>
 		<db:insert config-ref="MySQL_Configuration" doc:name="Insert User Details">
 			<db:parameterized-query>
 				<![CDATA[INSERT INTO `users` (`email`,`password`,`token`,`token_date`,`registration_date`) VALUES (#[flowVars.email],#[flowVars.password_encrypted],#[flowVars.token],#[server.dateTime.format("yyyy.MM.dd' 'HH:mm:ss")],#[server.dateTime.format("yyyy.MM.dd' 'HH:mm:ss")]);]]>
@@ -55,15 +55,13 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 		</db:insert>
 		<invoke object-ref="Methods" method="token" doc:name="Generate Token"/>
 		<db:insert config-ref="MySQL_Configuration" doc:name="Auth_id_token">
-			<db:parameterized-query>
-				<![CDATA[INSERT INTO authentication (user_id, auth_token) VALUES (#[flowVars.user_id], #[payload]);]]>
-			</db:parameterized-query>
+            <db:parameterized-query><![CDATA[INSERT INTO authentication (user_id, auth_token) VALUES (#[flowVars.user_id], #[payload]);]]></db:parameterized-query>
 		</db:insert>
-		<set-payload value="    &lt;h1&gt;Please verify your account by clicking the link below&lt;/h1&gt;     &lt;p&gt;&lt;a href=&quot; C:\Users\ahmad\Desktop\hc\emailVerfiyHTML.html?#[flowVars.email]&amp;#[flowVars.token] &quot;&gt;Verify..&lt;/a&gt;&lt;/p&gt; " encoding="ISO-8859-1" mimeType="text/html" doc:name="Content"/>
-		<smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="email" password="password" connector-ref="Gmail" to="#[flowVars.email]" subject="Account Verification" responseTimeout="10000" encoding="UTF-8" mimeType="text/html" doc:name="Send Email"/>
-		<set-payload value="true" doc:name="true"/>
+        <parse-template location="C:\Users\ahmad\Desktop\hc\EmailVerification.html" doc:name="Content"/>
+        <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="Email" password="Password" connector-ref="Gmail" to="#[flowVars.email]" subject="Account Verification" responseTimeout="10000" encoding="UTF-8" mimeType="text/html" doc:name="Send Email"/>
+		<set-payload value="true" doc:name="return True"/>
 		<catch-exception-strategy doc:name="Catch Exception Strategy">
-			<set-payload value="false" doc:name="false"/>
+			<set-payload value="false" doc:name="return False"/>
 		</catch-exception-strategy>
 	</flow>
 	<flow name="email_verificationFlow">
@@ -75,10 +73,10 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 		</db:update>
 		<choice doc:name="Choice">
 			<when expression="#[payload.equals(1)]">
-				<set-payload value="true" doc:name="true"/>
+				<set-payload value="true" doc:name="return True"/>
 			</when>
 			<otherwise>
-				<set-payload value="false" doc:name="false"/>
+				<set-payload value="false" doc:name="return False"/>
 			</otherwise>
 		</choice>
 	</flow>
@@ -108,7 +106,7 @@ WHERE user_id = #[payload.user_id];]]>
 	</flow>
 	<flow name="forgot_passwordFlow">
 		<http:listener config-ref="HTTP_Listener_Configuration" path="/users/password/forgot" allowedMethods="POST" doc:name="/users/password/forgot"/>
-		<set-variable variableName="email" value="#[message.payload.email]" doc:name="Email"/>
+		<set-variable variableName="email" value="#[message.payload.email]" doc:name="http.Email"/>
 		<invoke object-ref="Methods" method="token" doc:name="Generate Token"/>
 		<set-variable variableName="token" value="#[payload]" doc:name="Token"/>
 		<db:update config-ref="MySQL_Configuration" doc:name="Insert Token">
@@ -118,12 +116,12 @@ WHERE user_id = #[payload.user_id];]]>
 		</db:update>
         <choice doc:name="Choice">
             <when expression="#[payload &gt; 0]">
-                <set-payload value="C:\Users\ahmad\Desktop\hc\resetPasswordHTML.html?#[flowVars.email]&amp;#[flowVars.token]" doc:name="URI"/>
-                <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="email" password="password" connector-ref="Gmail" to="#[flowVars.email]" subject="Reset Password" responseTimeout="10000" encoding="UTF-8" mimeType="text/html" doc:name="Send Email"/>
-                <set-payload value="true" doc:name="true"/>
+                <parse-template location="C:\Users\ahmad\Desktop\hc\ResetPassword.html" doc:name="Content"/>
+                <smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="Email" password="Password" connector-ref="Gmail" to="#[flowVars.email]" subject="Reset Password" responseTimeout="10000" encoding="UTF-8" mimeType="text/html" doc:name="Send Email"/>
+                <set-payload value="true" doc:name="return True"/>
             </when>
             <otherwise>
-                <set-payload value="false" doc:name="false"/>
+                <set-payload value="false" doc:name="return False"/>
             </otherwise>
         </choice>
 	</flow>
@@ -139,7 +137,7 @@ WHERE user_id = #[payload.user_id];]]>
 	</flow>
 	<flow name="reset_passwordFlow">
 		<http:listener config-ref="HTTP_Listener_Configuration" path="/users/password/reset" doc:name="/users/password/reset" allowedMethods="POST"/>
-		<set-variable variableName="email" value="#[message.payload.email]" doc:name="email"/>
+		<set-variable variableName="email" value="#[message.payload.email]" doc:name="http.Email"/>
 		<invoke object-ref="Methods" method="pw" methodArguments="#[message.payload.password]" doc:name="Encrypt Password"/>
 		<db:update config-ref="MySQL_Configuration" doc:name="Update Password">
             <db:parameterized-query><![CDATA[UPDATE users
@@ -197,9 +195,9 @@ and member_id = #[payload.'member_id'];]]>
 	</flow>
 	<flow name="resendemailverification">
 		<http:listener config-ref="HTTP_Listener_Configuration" path="/email_verification/resend" allowedMethods="POST" doc:name="/email_verification/resend"/>
-		<set-variable variableName="email" value="#[payload.'email']" doc:name="email"/>
-        <invoke object-ref="Methods" method="token" doc:name="generateToken"/>
-		<set-variable variableName="token" value="#[payload]" doc:name="token"/>
+		<set-variable variableName="email" value="#[payload.'email']" doc:name="http.Email"/>
+        <invoke object-ref="Methods" method="token" doc:name="Generate Token"/>
+		<set-variable variableName="token" value="#[payload]" doc:name="Token"/>
 		<db:update config-ref="MySQL_Configuration" doc:name="Database">
 			<db:parameterized-query>
 				<![CDATA[update users
@@ -209,24 +207,22 @@ where email = #[flowVars.email] and status = 0;]]>
 		</db:update>
 		<choice doc:name="Choice">
 			<when expression="#[payload &gt; 0]">
-				<set-payload value="C:\Users\ahmad\Desktop\hc\emailVerfiyHTML.html?#[flowVars.email]&amp;#[flowVars.token]" doc:name="Content"/>
+                <parse-template location="C:\Users\ahmad\Desktop\hc\EmailVerification.html" doc:name="Content"/>
 				<smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="email" password="password" connector-ref="Gmail" to="#[flowVars.email]" subject="Account Verification" responseTimeout="10000" encoding="UTF-8" mimeType="text/html" doc:name="Send Email"/>
-				<set-payload value="true" doc:name="return true"/>
+				<set-payload value="true" doc:name="return True"/>
 			</when>
 			<otherwise>
-				<set-payload value="false" doc:name="return false"/>
+				<set-payload value="false" doc:name="return False"/>
 			</otherwise>
 		</choice>
 	</flow>
 	<flow name="addmember">
 		<http:listener config-ref="HTTP_Listener_Configuration" path="/members/relation/add" allowedMethods="POST" doc:name="/members/relation/add"/>
-		<set-variable variableName="email" value="#[payload.'email']" doc:name="email"/>
-		<set-variable variableName="user_id" value="#[payload.'user_id']" doc:name="user_id"/>
+		<set-variable variableName="email" value="#[payload.'email']" doc:name="http.Email"/>
+        <set-variable variableName="user_id" value="#[payload.'user_id']" doc:name="http.User_id"/>
 		<db:insert config-ref="MySQL_Configuration" doc:name="insert into users (email, status)">
-			<db:parameterized-query>
-				<![CDATA[insert into users (email, status, password, token, registration_date)
-values (#[flowVars.email], 2, 'added member', 'added member', #[server.dateTime.format("yyyy.MM.dd' 'HH:mm:ss")]);]]>
-			</db:parameterized-query>
+            <db:parameterized-query><![CDATA[insert into users (email, status, password, token, registration_date)
+values (#[flowVars.email], 2, 'added member', 'added member', #[server.dateTime.format("yyyy.MM.dd' 'HH:mm:ss")]);]]></db:parameterized-query>
 		</db:insert>
 		<db:select config-ref="MySQL_Configuration" doc:name="select user_id">
 			<db:parameterized-query>
@@ -293,8 +289,8 @@ WHERE user_id = (SELECT user_id FROM relation WHERE member_id = #[flowVars.catch
 values (#[flowVars.user_id],#[flowVars.catchuser_id],0,#[flowVars.token]);]]>
 								</db:parameterized-query>
 							</db:insert>
-							<set-payload value="C:\Users\ahmad\Desktop\hc\followVerfiyHTML.html?#[flowVars.user_id]&amp;#[flowVars.token]&amp;#[flowVars.catchuser_id]" doc:name="Content"/>
-							<smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="email" password="password" connector-ref="Gmail" to="#[flowVars.email]" subject="Account Verification" responseTimeout="10000" encoding="UTF-8" mimeType="text/html" doc:name="Send Email"/>							<set-payload value="0" doc:name="return 0"/>
+                            <parse-template location="C:\Users\ahmad\Desktop\hc\AddMemberVerification.html" doc:name="Content"/>
+							<smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="Email" password="Password" connector-ref="Gmail" to="#[flowVars.email]" subject="Account Verification" responseTimeout="10000" encoding="UTF-8" mimeType="text/html" doc:name="Send Email"/>							<set-payload value="0" doc:name="return 0"/>
 						</when>
 						<when expression="#[payload.isEmpty() == false ]">
 							<set-payload value="-2" doc:name="return -2"/>
@@ -308,8 +304,8 @@ values (#[flowVars.user_id],#[flowVars.catchuser_id],0,#[flowVars.token]);]]>
 values (#[flowVars.user_id],#[flowVars.catchuser_id],0,#[flowVars.token2]);]]>
 								</db:parameterized-query>
 							</db:insert>
-							<set-payload value="C:\Users\ahmad\Desktop\hc\followVerfiyHTML.html?#[flowVars.user_id]&amp;#[flowVars.token2]&amp;#[flowVars.catchuser_id]" doc:name="Content"/>
-							<smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="email" password="password" connector-ref="Gmail" to="#[flowVars.email]" subject="Account Verification" responseTimeout="10000" encoding="UTF-8" mimeType="text/html" doc:name="Send Email"/>
+                            <parse-template location="C:\Users\ahmad\Desktop\hc\AddMemberVerification2.html" doc:name="Content"/>
+							<smtp:outbound-endpoint host="smtp.gmail.com" port="587" user="Email" password="Password" connector-ref="Gmail" to="#[flowVars.email]" subject="Account Verification" responseTimeout="10000" encoding="UTF-8" mimeType="text/html" doc:name="Send Email"/>
 							<set-payload value="-1" doc:name="return -1"/>
 						</when>
 						<otherwise>
@@ -352,11 +348,11 @@ set `f_name` = #[payload.'f_name'],`l_name` = #[payload.'l_name'],`gender` = #[p
 where `user_id` = #[payload.'user_id'];]]>
 			</db:parameterized-query>
 		</db:update>
-		<set-payload value="true" doc:name="true"/>
+		<set-payload value="true" doc:name="return True"/>
 	</flow>
 	<flow name="loginFlow">
 		<http:listener config-ref="HTTP_Listener_Configuration" path="/login"  doc:name="/login"/>
-		<set-variable variableName="postPassword" value="#[payload['password']]" doc:name="postPassword"/>
+		<set-variable variableName="postPassword" value="#[payload['password']]" doc:name="http.Password"/>
 		<db:select config-ref="MySQL_Configuration" doc:name="select authentication.auth_token, users.password, users.status">
 			<db:parameterized-query>
 				<![CDATA[select authentication.auth_token, users.password, users.status
